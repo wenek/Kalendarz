@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <!-- Data dnia -->
+    <TextView
+        android:id="@+id/tvDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="01.01.2024"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:padding="16dp"/>
+
+    <!-- Lista świąt -->
+    <LinearLayout
+        android:id="@+id/holidaysContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="16dp">
+    </LinearLayout>
+
+    <!-- Przycisk nawigacji do wczorajszego dnia -->
+    <Button
+        android:id="@+id/btnPreviousDay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Poprzedni dzień"
+        android:layout_marginTop="32dp"
+        android:layout_gravity="start" />
+
+    <!-- Przycisk nawigacji do jutrzejszego dnia -->
+    <Button
+        android:id="@+id/btnNextDay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Następny dzień"
+        android:layout_marginTop="32dp"
+        android:layout_gravity="end" />
+
+</LinearLayout>
