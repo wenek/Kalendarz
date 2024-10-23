@@ -22,6 +22,7 @@ class RegisterActivity : AppCompatActivity() {
 
         val emailField = findViewById<EditText>(R.id.etEmail)
         val passwordField = findViewById<EditText>(R.id.etPassword)
+        val passwordConfirmField = findViewById<EditText>(R.id.etConfirmPassword)
         val registerButton = findViewById<Button>(R.id.btnRegister)
         val returnToLoginButton = findViewById<Button>(R.id.btnReturnToLogin)
 
@@ -29,8 +30,13 @@ class RegisterActivity : AppCompatActivity() {
         registerButton.setOnClickListener {
             val email = emailField.text.toString()
             val password = passwordField.text.toString()
+            val passwordConfirm = passwordConfirmField.text.toString()
 
-            if (email.isNotEmpty() && password.isNotEmpty()) {
+            if (email.isNotEmpty() && password.isNotEmpty() && passwordConfirm.isNotEmpty()) {
+                if (password != passwordConfirm) {
+                    Toast.makeText(this, "Hasła nie są takie same", Toast.LENGTH_SHORT).show()
+                    return@setOnClickListener
+                }
                 registerUser(email, password)
             } else {
                 Toast.makeText(this, "Wypełnij wszystkie pola", Toast.LENGTH_SHORT).show()

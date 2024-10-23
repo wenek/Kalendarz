@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "791535892300",
+    "project_id": "kalendarz-8c94a",
+    "storage_bucket": "kalendarz-8c94a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:791535892300:android:753ee2c0bb3888b0d8c1e9",
+        "android_client_info": {
+          "package_name": "com.example.kalendarzsemi"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBgYK05okHBtVv4XBg-uAHw63yVWOQdQtk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

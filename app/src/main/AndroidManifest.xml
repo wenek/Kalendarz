@@ -28,6 +28,7 @@
         <activity android:name=".MainActivity" />
         <activity android:name=".SettingsActivity" />
         <activity android:name=".LoginActivity" />
+        <activity android:name=".RegisterActivity" />
         <activity android:name=".CalendarActivity" />
         <activity android:name=".HolidayDetailActivity" />
     </application>

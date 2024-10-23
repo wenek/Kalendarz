@@ -19,6 +19,7 @@
         android:id="@+id/etUsername"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:autofillHints=""
         android:hint="Nazwa użytkownika"
         android:layout_marginBottom="10dp" />
 
@@ -26,6 +27,7 @@
         android:id="@+id/etPassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:autofillHints=""
         android:hint="Hasło"
         android:inputType="textPassword"
         android:layout_marginBottom="20dp" />
@@ -40,6 +42,15 @@
         android:id="@+id/btnReturnToMain"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Wróć"
+        android:layout_marginTop="20dp"
+        android:text="Wróć" />
+
+    <Button
+        android:id="@+id/btnGoToRegister"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Zarejestruj się"
         android:layout_marginTop="20dp" />
+
+
 </LinearLayout>

@@ -31,6 +31,14 @@
         android:inputType="textPassword"
         android:layout_marginBottom="20dp" />
 
+    <EditText
+        android:id="@+id/etConfirmPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Powtórz Hasło"
+        android:inputType="textPassword"
+        android:layout_marginBottom="20dp" />
+
     <Button
         android:id="@+id/btnRegister"
         android:layout_width="wrap_content"
@@ -41,6 +49,6 @@
         android:id="@+id/btnReturnToLogin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Wróć do logowania"
-        android:layout_marginTop="20dp" />
+        android:layout_marginTop="20dp"
+        android:text="Wróć do logowania" />
 </LinearLayout>

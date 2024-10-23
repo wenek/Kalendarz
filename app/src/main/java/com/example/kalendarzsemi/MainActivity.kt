@@ -36,6 +36,13 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+        val btnRegister = findViewById<Button>(R.id.btnRegister)
+        btnRegister.setOnClickListener {
+            // Przejście do ekranu rejestracji
+            val intent = Intent(this, RegisterActivity::class.java)
+            startActivity(intent)
+        }
+
         val btnCalendar = findViewById<Button>(R.id.btnCalendar)
         btnCalendar.setOnClickListener {
             val intent = Intent(this, CalendarActivity::class.java)
