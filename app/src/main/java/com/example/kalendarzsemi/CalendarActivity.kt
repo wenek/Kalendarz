@@ -1,11 +1,13 @@
 package com.example.kalendarzsemi
 
-import android.content.Intent
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import androidx.preference.PreferenceManager
 import org.json.JSONObject
 import java.io.BufferedReader
@@ -33,6 +35,10 @@ class CalendarActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_calendar)
 
+        // Konfiguracja Toolbar
+        val toolbar = findViewById<Toolbar>(R.id.toolbar)
+        setSupportActionBar(toolbar)
+
         holidaysContainer = findViewById(R.id.holidaysContainer)
         dateTextView = findViewById(R.id.tvDate)
 
@@ -49,6 +55,44 @@ class CalendarActivity : AppCompatActivity() {
 
         btnNextDay.setOnClickListener {
             changeDay(1)
+        }
+    }
+
+    // Nadmuchanie menu z pliku XML (main_menu.xml)
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.main_menu, menu)
+        return true
+    }
+
+    // Obsługa kliknięć elementów menu
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.home -> {
+                // Obsługa kliknięcia "Home"
+                true
+            }
+            R.id.calendar -> {
+                // Obsługa kliknięcia "Calendar"
+                true
+            }
+            R.id.settings -> {
+                // Obsługa kliknięcia "Settings"
+                true
+            }
+            R.id.about -> {
+                // Obsługa kliknięcia "About"
+                true
+            }
+            R.id.exit -> {
+                // Obsługa kliknięcia "Exit"
+                finish() // Zamknięcie aplikacji
+                true
+            }
+            R.id.logout -> {
+                // Obsługa kliknięcia "Logout"
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
         }
     }
 
@@ -78,10 +122,7 @@ class CalendarActivity : AppCompatActivity() {
                 setPadding(0, 8, 0, 8)
                 setOnClickListener {
                     // Przejście do widoku szczegółów święta
-                    val intent = Intent(this@CalendarActivity, HolidayDetailActivity::class.java)
-                    intent.putExtra("holiday_name", holiday.first) // Przekazanie nazwy
-                    intent.putExtra("holiday_description", holiday.second) // Przekazanie opisu
-                    startActivity(intent)
+                    // ...
                 }
             }
             holidaysContainer.addView(holidayTextView)
