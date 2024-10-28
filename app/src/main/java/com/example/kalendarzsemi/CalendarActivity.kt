@@ -1,5 +1,6 @@
 package com.example.kalendarzsemi
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -9,6 +10,7 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.preference.PreferenceManager
+import com.google.firebase.auth.FirebaseAuth
 import org.json.JSONObject
 import java.io.BufferedReader
 import java.io.InputStreamReader
@@ -68,15 +70,24 @@ class CalendarActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.home -> {
-                // Obsługa kliknięcia "Home"
+                val intent = Intent(this, ProfileActivity::class.java)
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
+                startActivity(intent)
+                finish()
                 true
             }
             R.id.calendar -> {
-                // Obsługa kliknięcia "Calendar"
+                val intent = Intent(this, CalendarActivity::class.java)
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
+                startActivity(intent)
+                finish()
                 true
             }
             R.id.settings -> {
-                // Obsługa kliknięcia "Settings"
+                val intent = Intent(this, SettingsActivity::class.java)
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
+                startActivity(intent)
+                finish()
                 true
             }
             R.id.about -> {
@@ -85,11 +96,16 @@ class CalendarActivity : AppCompatActivity() {
             }
             R.id.exit -> {
                 // Obsługa kliknięcia "Exit"
-                finish() // Zamknięcie aplikacji
+                finish()
                 true
             }
             R.id.logout -> {
-                // Obsługa kliknięcia "Logout"
+                val auth = FirebaseAuth.getInstance()
+                auth.signOut()
+
+                val intent = Intent(this, LoginActivity::class.java)
+                startActivity(intent)
+                finish()
                 true
             }
             else -> super.onOptionsItemSelected(item)
