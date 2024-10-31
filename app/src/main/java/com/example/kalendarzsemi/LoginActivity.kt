@@ -72,7 +72,7 @@ class LoginActivity : AppCompatActivity() {
                 if (task.isSuccessful) {
                     Toast.makeText(this, "Logowanie udane", Toast.LENGTH_SHORT).show()
                     // Przekierowanie do głównej aktywności
-                    val intent = Intent(this, MainActivity::class.java)
+                    val intent = Intent(this, CalendarActivity::class.java)
                     startActivity(intent)
                     finish() // Zamykamy LoginActivity
                 } else {
