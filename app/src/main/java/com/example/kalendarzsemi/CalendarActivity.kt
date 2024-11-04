@@ -73,25 +73,24 @@ class CalendarActivity : AppCompatActivity() {
                 val intent = Intent(this, ProfileActivity::class.java)
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
                 startActivity(intent)
-                finish()
                 true
             }
             R.id.calendar -> {
                 val intent = Intent(this, CalendarActivity::class.java)
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
                 startActivity(intent)
-                finish()
                 true
             }
             R.id.settings -> {
                 val intent = Intent(this, SettingsActivity::class.java)
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
                 startActivity(intent)
-                finish()
                 true
             }
             R.id.about -> {
-                // Obsługa kliknięcia "About"
+                val intent = Intent(this, AboutActivity::class.java)
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
+                startActivity(intent)
                 true
             }
             R.id.exit -> {

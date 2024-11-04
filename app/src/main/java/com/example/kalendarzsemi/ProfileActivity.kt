@@ -1,32 +1,37 @@
 package com.example.kalendarzsemi
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
+import androidx.appcompat.widget.Toolbar
 import com.google.firebase.auth.FirebaseAuth
-import android.widget.Toast
 import com.google.firebase.database.*
 
 class ProfileActivity : AppCompatActivity() {
 
     private lateinit var databaseReference: DatabaseReference
     private lateinit var auth: FirebaseAuth
-
     private lateinit var nameTextView: TextView
     private lateinit var emailTextView: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         setContentView(R.layout.activity_profile)
 
-        // Inicjalizacja Firebase Auth i referencji do bazy danych
+        // Konfiguracja Firebase
         auth = FirebaseAuth.getInstance()
         databaseReference = FirebaseDatabase.getInstance().reference
 
-        // Znajdź widoki
+        // Konfiguracja Toolbar
+        val toolbar = findViewById<Toolbar>(R.id.toolbar)
+        setSupportActionBar(toolbar)
+
+        // Znalezienie widoków
         nameTextView = findViewById(R.id.profileName)
         emailTextView = findViewById(R.id.profileEmail)
 
@@ -34,44 +39,69 @@ class ProfileActivity : AppCompatActivity() {
         loadUserProfile()
     }
 
+    // Nadmuchanie menu z pliku XML
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.main_menu, menu)
+        return true
+    }
+
+    // Obsługa kliknięć w elementy menu
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.home -> {
+                startActivity(Intent(this, ProfileActivity::class.java))
+                finish()
+                true
+            }
+            R.id.calendar -> {
+                startActivity(Intent(this, CalendarActivity::class.java))
+                finish()
+                true
+            }
+            R.id.settings -> {
+                startActivity(Intent(this, SettingsActivity::class.java))
+                finish()
+                true
+            }
+            R.id.about -> {
+                val intent = Intent(this, AboutActivity::class.java)
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
+                startActivity(intent)
+                true
+            }
+            R.id.logout -> {
+                auth.signOut()
+                startActivity(Intent(this, LoginActivity::class.java))
+                finish()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
+
     private fun loadUserProfile() {
         val currentUser = auth.currentUser
         if (currentUser != null) {
             val userUid = currentUser.uid
-            val userRef = databaseReference.child("Users").child(userUid)
+            val userRef = databaseReference.child("users").child(userUid)
 
-            // Logowanie UID użytkownika
             Log.e("UserProfile", "User UID: $userUid")
 
-            // Pobieranie informacji z bazy danych
             userRef.get().addOnSuccessListener { snapshot ->
                 if (snapshot.exists()) {
-                    val name = snapshot.child("name").value.toString()
                     val email = snapshot.child("email").value.toString()
-
-                    // Logowanie pobranych danych
+                    val name = snapshot.child("name").value.toString()
                     Log.e("UserProfile", "Name: $name, Email: $email")
-
-                    // Wyświetlanie pobranych informacji w widoku
-                    findViewById<TextView>(R.id.profileName).text = name
-                    findViewById<TextView>(R.id.profileEmail).text = email
+                    nameTextView.text = name
+                    emailTextView.text = email
                 } else {
-                    // Logowanie braku danych w bazie
                     Log.e("UserProfile", "Dane użytkownika nie istnieją")
-                    Toast.makeText(this, "Dane użytkownika nie istnieją", Toast.LENGTH_SHORT).show()
                 }
             }.addOnFailureListener { exception ->
-                // Logowanie błędu podczas pobierania danych
                 Log.e("UserProfile", "Błąd odczytu danych: ${exception.message}")
-                Toast.makeText(this, "Błąd odczytu danych: ${exception.message}", Toast.LENGTH_SHORT).show()
             }
         } else {
-            // Logowanie braku zalogowanego użytkownika
             Log.e("UserProfile", "Użytkownik nie jest zalogowany")
-            Toast.makeText(this, "Użytkownik nie jest zalogowany", Toast.LENGTH_SHORT).show()
         }
     }
-
-
-
 }

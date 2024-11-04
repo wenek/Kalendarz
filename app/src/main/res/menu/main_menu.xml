@@ -3,7 +3,7 @@
     <group>
         <item android:id="@+id/home"
             android:icon="@drawable/baseline_home_24"
-            android:title="Home">
+            android:title="Profile">
         </item>
         <item android:id="@+id/calendar"
             android:icon="@drawable/baseline_calendar_today_24"

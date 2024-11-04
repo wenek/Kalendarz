@@ -51,16 +51,12 @@ class SettingsActivity : AppCompatActivity() {
             recreate()
         }
 
-        // Obsługa przycisku "Wróć"
+// Obsługa przycisku "Wróć"
         val btnReturn = findViewById<Button>(R.id.btnReturn)
         btnReturn.setOnClickListener {
-            // Przejście z powrotem do MainActivity po zapisaniu zmian
-            val intent = Intent(this, MainActivity::class.java)
-            // Usuwamy wszystkie aktywności z góry stosu, aby wrócić do świeżego MainActivity
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
-            startActivity(intent)
-            finish() // Zamykamy SettingsActivity
+            finish()
         }
+
     }
 
     // Funkcja do zapisywania wybranej kolorystyki

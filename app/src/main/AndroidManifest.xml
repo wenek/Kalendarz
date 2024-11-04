@@ -32,6 +32,8 @@
         <activity android:name=".CalendarActivity" />
         <activity android:name=".HolidayDetailActivity" />
         <activity android:name=".ProfileActivity" />
+        <activity android:name=".AboutActivity"/>
+
     </application>
 
 
