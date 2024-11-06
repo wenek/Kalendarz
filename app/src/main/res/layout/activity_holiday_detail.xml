@@ -6,6 +6,15 @@
     android:padding="16dp"
     android:gravity="center">
 
+
+    <TextView
+        android:id="@+id/textViewHolidayDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:padding="8dp"
+        android:textColor="?attr/colorPrimary" />
+
     <!-- Wyświetlenie nazwy święta -->
     <TextView
         android:id="@+id/textViewHolidayName"

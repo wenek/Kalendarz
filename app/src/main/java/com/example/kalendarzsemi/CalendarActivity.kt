@@ -117,29 +117,29 @@ class CalendarActivity : AppCompatActivity() {
         updateCalendar()
     }
 
-    // Funkcja do aktualizacji kalendarza
     private fun updateCalendar() {
         val dateFormat = SimpleDateFormat("dd.MM.yyyy", Locale.getDefault())
         val formattedDate = dateFormat.format(currentDate.time)
 
-        // Aktualizacja widoku daty
+        // Update date view
         dateTextView.text = formattedDate
 
-        // Czyszczenie listy świąt
+        // Clear previous holiday views
         holidaysContainer.removeAllViews()
 
+        // Load holidays for the selected date
         val holidays = loadHolidaysForDate(formattedDate)
         holidays.forEach { holiday ->
-            // Każde święto będzie klikalnym TextView
             val holidayTextView = TextView(this).apply {
-                text = holiday.first // Nazwa święta
+                text = holiday.first // Holiday name
                 textSize = 18f
                 setPadding(0, 8, 0, 8)
                 setOnClickListener {
-                    // Przejście do widoku szczegółów święta
+                    // Pass holiday details and date to HolidayDetailActivity
                     val intent = Intent(this@CalendarActivity, HolidayDetailActivity::class.java)
-                    intent.putExtra("holiday_name", holiday.first) // Przekazanie nazwy
-                    intent.putExtra("holiday_description", holiday.second) // Przekazanie opisu
+                    intent.putExtra("holiday_name", holiday.first)       // Pass the name
+                    intent.putExtra("holiday_description", holiday.second) // Pass the description
+                    intent.putExtra("holiday_date", holiday.third)         // Pass the date
                     startActivity(intent)
                 }
             }
@@ -147,24 +147,25 @@ class CalendarActivity : AppCompatActivity() {
         }
     }
 
-    // Funkcja do ładowania świąt dla danego dnia
-    private fun loadHolidaysForDate(date: String): List<Pair<String, String>> {
-        val holidaysList = mutableListOf<Pair<String, String>>()
 
-        // Odczytanie pliku JSON z raw
+    private fun loadHolidaysForDate(date: String): List<Triple<String, String, String>> {
+        val holidaysList = mutableListOf<Triple<String, String, String>>()
+
+        // Load JSON file from resources
         val jsonString = loadJsonFromRaw(R.raw.holidays)
         val jsonObject = JSONObject(jsonString)
 
-        // Pobranie świąt dla podanej daty
+        // Retrieve holidays for the given date
         val holidaysForDay = jsonObject.optJSONArray(date)
         holidaysForDay?.let {
             for (i in 0 until it.length()) {
                 val holiday = it.getJSONObject(i)
-                holidaysList.add(Pair(holiday.getString("name"), holiday.getString("description")))
+                holidaysList.add(Triple(holiday.getString("name"), holiday.getString("description"), date))
             }
         }
         return holidaysList
     }
+
 
     // Funkcja do ładowania pliku JSON z zasobów raw
     private fun loadJsonFromRaw(resourceId: Int): String {

@@ -34,46 +34,50 @@ class HolidayDetailActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_holiday_detail)
 
-        // Inicjalizacja Firebase Auth i referencji do bazy danych
+// Initialize Firebase Auth and database reference
         auth = FirebaseAuth.getInstance()
         databaseReference = FirebaseDatabase.getInstance().reference
 
-        // Odczytanie danych przekazanych z CalendarActivity
+        // Retrieve holiday data from the intent
         val holidayName = intent.getStringExtra("holiday_name")
         val holidayDescription = intent.getStringExtra("holiday_description")
+        val holidayDate = intent.getStringExtra("holiday_date") // Get holiday date
 
-        // Wyświetlanie nazwy i opisu święta
+        // Display holiday details
         val textViewName = findViewById<TextView>(R.id.textViewHolidayName)
         val textViewDescription = findViewById<TextView>(R.id.textViewHolidayDescription)
+        val textViewDate = findViewById<TextView>(R.id.textViewHolidayDate) // New TextView for date
+
         textViewName.text = holidayName
         textViewDescription.text = holidayDescription
+        textViewDate.text = holidayDate // Display the holiday date
 
-        // Przycisk powrotu do CalendarActivity
+        // Handle back button
         val btnBack = findViewById<Button>(R.id.btnBackToCalendar)
         btnBack.setOnClickListener {
-            finish() // Wracamy do poprzedniej aktywności (CalendarActivity)
+            finish()
         }
 
-        // Przycisk dodania do ulubionych
+        // Handle adding to favorites
         val btnAddToFavorites = findViewById<Button>(R.id.btnAddToFavorites)
         btnAddToFavorites.setOnClickListener {
-            saveHolidayToFavorites(holidayName, holidayDescription)
+            saveHolidayToFavorites(holidayName, holidayDescription, holidayDate)
         }
     }
 
-    // Funkcja do zapisania święta do ulubionych
-    private fun saveHolidayToFavorites(holidayName: String?, holidayDescription: String?) {
+    // Function to save the holiday to favorites with date
+    private fun saveHolidayToFavorites(holidayName: String?, holidayDescription: String?, holidayDate: String?) {
         val currentUser = auth.currentUser
         val database = Firebase.database
         if (currentUser != null) {
             val userUid = currentUser.uid
             val favoritesRef = database.reference.child("users").child(userUid).child("favorites")
 
-            // Sprawdź, czy święto już istnieje
+            // Check if the holiday already exists
             favoritesRef.get().addOnSuccessListener { dataSnapshot ->
                 var alreadyExists = false
 
-                // Przeglądaj wszystkie istniejące święta użytkownika
+                // Iterate through the user's existing favorites to see if this holiday is already added
                 for (snapshot in dataSnapshot.children) {
                     val existingName = snapshot.child("name").getValue(String::class.java)
                     if (existingName == holidayName) {
@@ -83,16 +87,17 @@ class HolidayDetailActivity : AppCompatActivity() {
                 }
 
                 if (alreadyExists) {
-                    // Święto już istnieje w ulubionych
+                    // Notify user that the holiday is already in favorites
                     Toast.makeText(this, "To święto jest już w ulubionych", Toast.LENGTH_SHORT).show()
                 } else {
-                    // Tworzymy obiekt z informacjami o święcie
+                    // Create an object with holiday information, including the date
                     val holidayData = hashMapOf(
                         "name" to (holidayName ?: ""),
-                        "description" to (holidayDescription ?: "")
+                        "description" to (holidayDescription ?: ""),
+                        "date" to (holidayDate ?: "") // New field to store the holiday date
                     )
 
-                    // Zapisujemy święto do bazy danych
+                    // Save the holiday to the database
                     favoritesRef.push().setValue(holidayData)
                         .addOnSuccessListener {
                             Log.d("HolidayDetailActivity", "Święto dodane do ulubionych: $holidayName")
@@ -112,5 +117,6 @@ class HolidayDetailActivity : AppCompatActivity() {
             Toast.makeText(this, "Musisz być zalogowany, aby zapisać święto do ulubionych", Toast.LENGTH_SHORT).show()
         }
     }
+
 
 }
