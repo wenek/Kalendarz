@@ -137,7 +137,10 @@ class CalendarActivity : AppCompatActivity() {
                 setPadding(0, 8, 0, 8)
                 setOnClickListener {
                     // Przejście do widoku szczegółów święta
-                    // ...
+                    val intent = Intent(this@CalendarActivity, HolidayDetailActivity::class.java)
+                    intent.putExtra("holiday_name", holiday.first) // Przekazanie nazwy
+                    intent.putExtra("holiday_description", holiday.second) // Przekazanie opisu
+                    startActivity(intent)
                 }
             }
             holidaysContainer.addView(holidayTextView)

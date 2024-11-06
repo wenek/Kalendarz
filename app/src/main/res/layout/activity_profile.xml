@@ -52,16 +52,30 @@
         android:textSize="16sp"
         android:textColor="@android:color/darker_gray" />
 
-    <!-- Przycisk edycji profilu -->
     <Button
-        android:id="@+id/editProfileButton"
+        android:id="@+id/showFavoritesButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/profileEmail"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="24dp"
-        android:text="Edytuj Profil"
+        android:text="Ulubione"
         android:backgroundTint="@color/blue_primary"
+        android:textColor="@android:color/white" />
+
+    <!-- Przycisk edycji profilu -->
+    <Button
+        android:id="@+id/editProfileButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/showFavoritesButton"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="144dp"
+        android:layout_marginTop="155dp"
+        android:layout_marginEnd="142dp"
+        android:backgroundTint="@color/blue_primary"
+        android:text="Edytuj Profil"
         android:textColor="@android:color/white" />
 
 </RelativeLayout>

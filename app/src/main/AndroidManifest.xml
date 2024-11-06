@@ -33,7 +33,7 @@
         <activity android:name=".HolidayDetailActivity" />
         <activity android:name=".ProfileActivity" />
         <activity android:name=".AboutActivity"/>
-
+        <activity android:name=".FavoritesActivity"/>
     </application>
 
 

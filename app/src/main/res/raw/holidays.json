@@ -1091,9 +1091,344 @@
       "name": "Światowy Dzień Godności",
       "description": "To święto obchodzone w trzecią środę października ma na celu propagowanie uniwersalnego prawa każdego człowieka do godnego życia."
     }
+  ],
+  "17.10.2024": [
+    {
+      "name": "Międzynarodowy Dzień Walki z Ubóstwem",
+      "description": "Międzynarodowy Dzień Walki z Ubóstwem ma na celu zwrócić uwagę na problem biedy i wykluczenia społecznego oraz podkreślić solidarność i braterstwo z najuboższymi."
+    },
+    {
+      "name": "Polski Dzień Sprzedaży Bezpośredniej",
+      "description": "Sprzedaż bezpośrednia wywodzi się z handlu prowadzonego poprzez domokrążców – komiwojażerów. Jest to więc praca oparta na zaufaniu i tradycyjnych kontaktach międzyludzkich, ale podczas Polskiego Dnia Sprzedaży Bezpośredniej coraz więcej czasu poświęca się także na nowe technologie."
+    },
+    {
+      "name": "Dzień Arkusza Kalkulacyjnego",
+      "description": "Dzień Arkusza Kalkulacyjnego obchodzony jest 17 października, ponieważ jest to dzień, w którym VisiCalc, pierwszy program do obsługi arkuszy kalkulacyjnych dla Apple II został wydany w 1979 roku, a proces obliczania i zarządzania ogromnymi ilościami danych stał się płynny i łatwy."
+    },
+    {
+      "name": "Międzynarodowy Dzień Mediacji",
+      "description": "Międzynarodowy Dzień Mediacji to bardzo ważne wydarzenie w kalendarzu świąt nietypowych, bowiem uświadamia ludzi, że wiele spraw można rozwiązać bez konieczności sprawy sądowej. Tym bardziej cieszy, że w Polsce jest ono coraz bardziej popularne i rozpowszechnione."
+    },
+    {
+      "name": "Międzynarodowy Dzień Unii Kredytowych",
+      "description": "To święto, które ma długie tradycje. Światowa Rada Unii Kredytowych (WOCCU) wprowadziła je bowiem już w 1948 roku. Celem jest docenienie roli społecznej i ekonomicznej jaką odgrywają Unie Kredytowe."
+    }
+  ],
+  "18.10.2024": [
+    {
+      "name": "Dzień Łącznościowca",
+      "description": "To świeto osób związanzych z branżą telekomunikacyjną i pocztową wywodzi się jeszcze z czasów PRL-u. Zgodnie z tradycją obchodzono je w pierwszą niedzielę po 18. października."
+    },
+    {
+      "name": "Dzień Poczty Polskiej (Dzień Listonosza)",
+      "description": "Znienawidzeni przez psy, uwielbiani przez emerytów. Listonosze w swoje święto nie mają niestety wolnego, w dalszym ciągu są bowiem niezastąpieni. Mimo iż w dobie cyfryzacji listowa korespondencja towarzyska praktycznie umarła, ktoś przecież musi dostarczać listy z urzędów i instytucji, paczki, przesyłki i przekazy pocztowe. Dzień Listonosza ma na celu wyróżnienie niełatwej pracy dzielnych doręczycieli i doręczycielek, którzy regularnie zmagać się muszą nie tylko z kaprysami pogody, ale również klientów."
+    },
+    {
+      "name": "Europejski Dzień przeciwko Handlowi Ludźmi",
+      "description": "Wiele osób jest tego nieświadomych, ale bandyci często handlują ludźmi tuż obok nas. Kobiety zmuszane do prostytucji, dzieci do niewolniczej pracy albo żebrania na ulicach – przykładów jest wiele. Europejski Dzień przeciwko Handlowi Ludźmi ma na celu uświadamianie przed tym niebezpieczeństwem."
+    },
+    {
+      "name": "Święto Wojsk Łączności i Informatyki",
+      "description": "Święto wojskowych radiotelegrafistów, telefonistów, informatyków czy pracowników stacji pocztowych obchodzimy 18 października, w rocznicę powstania pierwszego stałego połączenia pocztowego pomiędzy Krakowem a Wenecją w 1558 roku."
+    },
+    {
+      "name": "Światowy Dzień Owoców i Warzyw",
+      "description": "Jest to międzynarodowa inicjatywa mająca na celu podniesienie świadomości społecznej co do znaczenia spożywania owoców i warzyw dla lepszego zdrowia."
+    }
+  ],
+  "19.10.2024": [
+    {
+      "name": "Narodowy Dzień Pamięci Duchownych Niezłomnych",
+      "description": "Kapłani oraz zakonnice na przestrzeni wieków wielokrotnie udowadniali, że potrafią stanąć w obronie religii oraz wiernych. Narodowy Dzień Pamięci Duchownych Niezłomnych na za zadanie uczcić tych z nich, którzy ponieśli śmierć w imię obrony najwyższych wartości."
+    },
+    {
+      "name": "Międzynarodowy Dzień Naprawy",
+      "description": "W Międzynarodowym Dniu Naprawy warto popatrzeć na rzeczy do wyrzucenia i zastanowić się czy na pewno są już bezużyteczne. Ludzie usuwają niesprawne sprzęty i kupują w ich miejsce nowe co generuje mnóstwo niepotrzebnych odpadów. Czasami zaś wystarczy dokręcić śrubkę czy wymienić żarówkę."
+    }
+  ],
+  "20.10.2024": [
+    {
+      "name": "Dzień Szelek",
+      "description": "Święto pasków zakładanych na ramiona i podtrzymujących spodnie to Dzień Szelek. Ten element garderoby obecnie jest produkowany w przeróżnych kolorach i wzorach dla kobiet oraz mężczyzn. W tym dniu warto założyć wzorzyste i oryginalne szelki."
+    },
+    {
+      "name": "Światowy Dzień Statystyki",
+      "description": "Obchody Dnia Statystyki uchwalono, by zwrócić uwagę na usługi świadczone przez globalny System Informacji Statystycznej."
+    },
+    {
+      "name": "Międzynarodowy Dzień Szefa Kuchni",
+      "description": "Inicjatorem Międzynarodowego Dnia Szefa Kuchni był Bill Gallagher. Przyświecał mu bardzo szczytny cel: to nie tylko szerzenie wiedzy o zawodzie Szefa Kuchni, ale i dzielenie się posiłkiem z potrzebującymi."
+    },
+    {
+      "name": "Dzień Krajobrazu",
+      "description": "Krajobraz odgrywa ważną rolę w naszym codziennym życiu – inspiruje, poprawia humor, motywuje do działania. Dlatego warto dbać o swoją najbliższą okolicę, im jest ona piękniejsza, tym lepiej będzie nam się mieszkało."
+    },
+    {
+      "name": "Międzynarodowy Dzień Leniwca",
+      "description": "Międzynarodowy Dzień Leniwca jest świętem powolnych, ale jednocześnie niezwykle uroczych zwierząt zamieszkujących lasy równikowe. W ich dniu organizacje związane z ochroną środowiska zwracają uwagę na to, że ludzie niszczą lasy równikowe, a co za tym idzie siedliska leniwców."
+    }
+  ],
+  "21.10.2024": [
+    {
+      "name": "Międzynarodowy dzień odpoczynku od świętowania",
+      "description": "Nawet najwięksi imprezowicze muszą kiedyś odpocząć, choćby po to, by zregenerować siły na następną balangę. Dziś bez wyrzutów sumienia można przeleżeć cały dzień w łóżku!"
+    },
+    {
+      "name": "Dzień Bez Skarpetek",
+      "description": "To święto, które ma zwrócić uwagę społeczeństwa na to, by dbać o stopy. A pomaga w tym chodzenie boso, które według specjalistów jest bardzo zdrowe. Aby przyłączyć się do obchodów, wystarczy więc nie zakładać skarpetek."
+    }
+  ],
+  "22.10.2024": [
+    {
+      "name": "Światowy Dzień Osób Jąkających",
+      "description": "Dzień ten, ustanowiony w 1998 roku podczas Światowego Kongresu Osób Jąkających się, ma na celu zwrócenie szczególnej uwagi społeczeństwa na przypadłość, z którą boryka się ponad 60 milionów osób na świecie."
+    },
+    {
+      "name": "Dzień Praw Rodziny",
+      "description": "Dzień Praw Rodziny jest okazją do rozmów na temat tego jak w dzisiejszym świecie ma funkcjonować rodzina oraz w jaki sposób ją chronić. Obecnie z wielu stron pojawiają się ataki na tę fundamentalną jednostkę społeczną, dlatego szczególnie młodzi ludzie zakładający rodziny powinni wiedzieć jak sobie z tym radzić."
+    },
+    {
+      "name": "Dzień CAPS LOCKA",
+      "description": "NIC TAK NIE WKURZA INTERNAUTÓW JAK PISANIE DUŻYMI LITERAMI, CZYLI WYDZIERANIE SIĘ NA INNYCH. NO ALE W ŚWIĘTO CAPS LOCKA NIE WYPADA INACZEJ."
+    }
+  ],
+  "23.10.2024": [
+    {
+      "name": "Międzynarodowy Dzień Pantery Śnieżnej",
+      "description": "Międzynarodowy Dzień Pantery Śnieżnej powstał, aby cały świat dowiedział, że ten gatunek jest krok od wyginięcia. Ludzie muszą dołożyć wszelkich starań, aby ochronić każdy zagrożony gatunek."
+    }
+  ],
+  "24.10.2024": [
+    {
+      "name": "Dzień Narodów Zjednoczonych",
+      "description": "Święto upamiętnia wejście w życie Karty Narodów Zjednoczonych 24 października 1945 roku. Z tej okazji na całym świecie odbywają się konferencje czy imprezy poświęcone Organizacji Narodów Zjednoczonych. Omawia się m. in. osiągnięcia i cele tej organizacji, jak utrzymanie pokoju i bezpieczeństwa czy rozwijanie przyjaznych stosunków między państwami."
+    },
+    {
+      "name": "Światowy Dzień Origami",
+      "description": "Czy tworzyliście kiedykolwiek samoloty, stateczki czy żabki z papieru? To są elementy japońskiej sztuki składania papieru Origami. Tradycyjne orgiami polega na tworzeniu figur z kwadratowego arkuszu papieru poprzez zaginanie, bez użycia kleju i nożyczek."
+    },
+    {
+      "name": "Dzień Bez Maila",
+      "description": "Świat bez e-maila? Dziś już jest to nie do pomyślenia. Warto jednak zaangażować się w obchody święta, które polega na ograniczeniu wysyłania elektronicznych wiadomości. Ma to zachęcić do bezpośredniego kontaktu z klientami i innymi pracownikami."
+    },
+    {
+      "name": "Międzynarodowe Święto Roweru",
+      "description": "Rower to wspaniały środek transportu. Wystarczy na niego wsiąść i jechać przed siebie – nie musimy martwić się paliwem czy korkami. Warto ten dzień świętować jak najczęściej, bo jazda na rowerze to dobry sposób na dobre zdrowie i samopoczucie."
+    },
+    {
+      "name": "Światowy Dzień Flaczków",
+      "description": "Światowy Dzień Flaczków daje szansę wszystkim smakoszom na delektowanie się od rana do wieczora tym pysznym daniem. Potrawa ma swoich wielbicieli, ale są też osoby, które za żadne skarby nie spróbują fragmentów wołowych żołądków nawet w ich dzień."
+    }
+  ],
+  "25.10.2024": [
+    {
+      "name": "Dzień Szewca",
+      "description": "Szewc, to zawód z duszą. Każdy czeladnik a potem mistrz szewski, wie, że robienie butów to artyzm. Potrzeba wyobraźni, siły ale i delikatności w dłoniach. Trzeba mieć pomyślunek, wizję, wyobraźnię aby projektować, produkować czy też naprawiać, przerabiać buty."
+    },
+    {
+      "name": "Dzień Kundelka",
+      "description": "Wiele państw, w tym Polska, świętuje Dzień Psa, niemniej u nas swojego nieformalnego święta doczekały się również wszystkie nierasowe czworonogi. Data nie jest przypadkowa – 25 października to wszak Dzień Ustawy o Ochronie Zwierząt."
+    },
+    {
+      "name": "Dzień Młodzieży PCK",
+      "description": "Dziś młodzi bohaterowie z Polskiego Czerwonego Krzyża, którzy bezinteresownie pomagają innym mają swoje święto. Warto więc im za to podziękować i życzyć zdrowia, wytrwałości oraz radości z podejmowanych wyzwań."
+    },
+    {
+      "name": "Światowy Dzień Makaronu",
+      "description": "Światowy Dzień Makaronu ustanowiono w 1995 roku z inicjatywy 40 producentów, by pokazać, że jest to produkt spożywany na całym świecie. Dziś warto przyrządzić makaron na swój ulubiony sposób, bądź trochę z nim poeksperymentować. Przy okazji można dowiedzieć się wielu ciekawych rzeczy, choćby tego, że wyróżniono około 600 gatunków i kształtów makaronu."
+    },
+    {
+      "name": "Światowy Dzień Opery",
+      "description": "Światowy Dzień Opery to gratka dla osób, które uwielbiają obcowanie z tą formą kultury. Obchody tego święta polegają na organizowaniu na scenach całego świata przedstawień operowych. Niektóre są za darmo, aby zachęcić ludzi do poznania opery."
+    }
+  ],
+  "26.10.2024": [
+    {
+      "name": "Światowy Dzień Donacji i Transplantacji",
+      "description": "To święto o randze globalnej, które pierwszy raz odbyło się w Genewie w dniu 14 października 2005 roku. Jego celem jest promowanie przeszczepów rodzinnych i organów od zmarłych. W tym celu na całym świecie organizowane są kongresy, konferencje oraz kampanie społeczne dotyczące dawstwa organów."
+    },
+    {
+      "name": "Światowy Dzień Wiedzy o Interseksualonści",
+      "description": "Światowy Dzień Wiedzy o Interseksualności ma nieść jasne przesłanie do opinii publicznej, że nie wolno stygmatyzować osób interpłciowych. Niestety w wielu krajach ludzie, którzy urodzili się z niejednoznacznością narządów płciowych są dyskryminowani, wyśmiewani, a niekiedy prześladowania wręcz zagrażają ich życiu. Ten dzień ma zachęcać do zmiany postrzegania osób interseksulanych."
+    }
+  ],
+  "27.10.2024": [
+    {
+      "name": "Światowy Dzień Dziedzictwa Audiowizualnego",
+      "description": "To święto podkreśla rolę jaką pełnią nagrania audio oraz wideo dokumentujące ważne wydarzenia z XIX i XX wieku. Dzień obchodów nawiązuje do zaleceń UNESCO z 27 października 1980 odnośnie ochrony i zachowania ruchomych obrazów. Światowy Dzień Dziedzictwa Audiowizualnego uchwalono w 2007 roku (w Polsce od 2008)."
+    },
+    {
+      "name": "Święto Terenowych Organów Administracji Wojskowej",
+      "description": "Święto Terenowych Organów Administracji Wojskowej jest doskonałym momentem, aby złożyć podziękowania pracownikom i żołnierzom TOAW. Osoby te codziennie wypełniają obowiązki na rzecz ojczyzny i reprezentują ją na wydarzeniach międzynarodowych."
+    },
+    {
+      "name": "Światowy Dzień Kapłana",
+      "description": "Światowy Dzień Kapłana obchodzony jest, aby wyrazić szacunek dla pracy wszystkich duchownych. Księża codziennie służą ludziom radami i są z wiernymi we wszystkich ważnych momentach począwszy od chrztu, przez śluby aż do ostatniej posługi."
+    }
+  ],
+  "28.10.2024": [
+    {
+      "name": "Dzień Odpoczynku dla Zszarganych Nerwów",
+      "description": "Nerwy, stres, przekleństwa, niecierpliwość, kłótnie – dziś zapomni o tym wszystkim . Wyluzuj, weź głęboki wdech, uśmiechnij się zamiast grymasić. A jutro koniecznie to powtórz!"
+    },
+    {
+      "name": "Światowy Dzień Animacji",
+      "description": "Międzynarodowy Dzień Animacji to święto obchodzone na cześć pierwszego publicznego pokazu animacji Theatre Optique Emile Reynaud'a w Grevin Museum w Paryżu. W ramach obchodów odbywają się pokazy filmów animowanych, wystawy, koncerty."
+    },
+    {
+      "name": "Dzień Miłośników Pluszaków",
+      "description": "Dzień Miłośników Pluszaków to święto nie tylko dzieci. Wielu dorosłych zbiera serie pluszowych misiów czy postaci z bajek. Podczas obchodów tego wydarzenia można pochwalić się w sieci swoją kolekcją i obejrzeć pluszaki innych."
+    }
+  ],
+  "29.10.2024": [
+    {
+      "name": "Międzynarodowy Dzień Łuszczycy",
+      "description": "W 2004 roku przy wsparciu i wydatnej pomocy Międzynarodowej Federacji Chorych na Łuszczycę ( IFPA ), z inicjatywy chorych na łuszczycę na całym świecie ustalono dzień 29 października Światowym Dniem Łuszczycy ( WPD)."
+    },
+    {
+      "name": "Dzień Udaru Mózgu",
+      "description": "Dzień Udaru Mózgu to czas, kiedy lekarze mówią o tym jak rozpoznać udar. Szybka reakcja to duża szansa, że chory wyzdrowieje. W tym dniu zwraca się też uwagę na rolę rehabilitacji w powrocie pacjentów po udarach do zdrowia."
+    },
+    {
+      "name": "Dzień Internetu",
+      "description": "W Dniu Internetu mówi się zarówno o wielkich korzyściach, które daje nam sieć, ale wspomina się również o zagrożeniach. W swoim założeniu internet jest genialnym wynalazkiem, ale niektórzy wykorzystują go do nielegalnych celów narażając innych użytkowników. W dniu tym warto też wspomnieć, że mimo ciągłego rozwoju są regiony, gdzie nadal nie ma dostępu do sieci."
+    }
+  ],
+  "30.10.2024": [
+    {
+      "name": "Dzień Spódnicy",
+      "description": "30 października przypada Dzień Spódnicy i pewnie wiele osób zastanawia się, dla kogo jest to święto? Dla pań, które powinny w tym dniu włożyć tę część ubioru, czy dla panów, którzy przecież uwielbiają kobiety w spódnicach? Wychodzi na to, że to święto, które zadowoli obie strony."
+    },
+    {
+      "name": "Święto Napojów Wyskokowych",
+      "description": "Dziś z pewnością trudno będzie sobie odmówić alkoholu. W końcu wino, piwo, wódka stworzona została dla ludzi, by uprzyjemnić nam życie, pozwolić się odstresować. Pamiętajmy tylko żeby nie przesadzić, bo jutrzejszy dzień może już nie być taki wesoły."
+    }
+  ],
+  "31.10.2024": [
+    {
+      "name": "Dzień Rozrzutności",
+      "description": "Przy ciągłym zaciskaniu pasa łatwo zapomnieć o tym, że każdemu należy się chwila zapomnienia i przyjemności. Dzień Rozrzutności ma zachęcić do chwytania dnia i otworzenia portfela na odrobinę luksusu. Najciekawsze jest jednak to, że Dzień Rozrzutności zbiega się z Dniem Oszczędzania, obchodzonym od wielu lat z inicjatywy największych światowych banków."
+    },
+    {
+      "name": "Światowy Dzień Oszczędzania",
+      "description": "Dziś warto założyć lokatę albo kupić świnkę skarbonkę. Jeśli będziemy systematycznie oszczędzać, odmówimy sobie kilku drobnych przyjemności, to za rok o tej porze uzbiera się całkiem fajna sumka."
+    },
+    {
+      "name": "Światowy Dzień Miast",
+      "description": "Światowy Dzień Miast został ogłoszony przez ONZ. Każdego roku motywem przewodnim jest inny temat, ale zawsze w obchodach chodzi o to, aby wypracować dla miast takie rozwiązania, aby stały się one bezpiecznym azylem dla mieszkańców, co obecnie nie jest takie oczywiste."
+    }
+  ],
+  "01.11.2024": [
+    {
+      "name": "Światowy Dzień Wegan",
+      "description": "Celem święta jest promowanie weganizmu, czyli wyeliminowania produktów pochodzenia zwierzęcego zarówno ze swojej diety, jak i w ogóle z życia. Na całym świecie obchodzi się je 11 listopada, dla upamiętnienia powstania Towarzystwa Wegańskiego w 1944 roku. W Polsce, ze względu na święto Wszystkich Świętych, datę obchodów wyznaczono na 1 października."
+    }
+  ],
+  "02.11.2024": [
+    {
+      "name": "Międzynarodowy Dzień Ukrócenia Bezkarności za Zbrodnie Przeciwko Dziennikarzom",
+      "description": "Decyzję o powołaniu Międzynarodowego Dnia Ukrócenia Bezkarności za Zbrodnie Przeciwko Dziennikarzom podjęło Zgromadzenie Ogólne ONZ w 2013 roku. Święto upamiętnia zabójstwo dwóch francuskich dziennikarzy w Mali, którzy zginęli w dniu 2 listopada 2013 roku. Jego celem jest przeciwdziałanie bezkarności sprawców, którzy dopuszczają się aktów przemocy na pracownikach mediów."
+    },
+    {
+      "name": "Światowy Dzień Numbata",
+      "description": "Światowy Dzień Numbata to pomysł jednej z organizacji prozwierzęcych w Australii. Obchody dnia poświęconego temu małemu zwierzakowi mają na celu nagłośnienie jego kłopotów z utratą naturalnych siedlisk. Numbat jest gatunkiem zagrożonym wyginięciem i jeśli nie otrzyma pomocy to już niedługo planeta może być uboższa o kolejny gatunek."
+    }
+  ],
+  "03.11.2024": [
+    {
+      "name": "Święto Myśliwych - Hubertus",
+      "description": "Hubertus (czy też Hubertowiny) to szczególnie ważny dzień dla myśliwych, jeźdźców i leśników. Tego dnia w Kościele katolickim jest wspomnienie świętego Huberta, patrona myśliwych."
+    },
+    {
+      "name": "Dzień Gospodyni Domowej",
+      "description": "3 listopada to ich dzień Dzień Gospodyni Domowej to okazja, by docenić wszystkie kobiety, które każdego dnia dbają o dom i rodzinę. W tym roku święto to zyskało zupełnie nowy wymiar"
+    },
+    {
+      "name": "Dzień Kanapki",
+      "description": "3 listopad przypada Światowy Dzień Kanapki. Zdrowa, pożywna, smaczna, a przy tym prosta w przygotowaniu – taka właśnie jest kanapka!"
+    }
+  ],
+  "04.11.2024": [
+    {
+      "name": "Dzień Taniego Wina",
+      "description": "Niepisany kodeks miłośników taniego wina głosi, że im jest ono tańsze, tym lepsze. Nie wiadomo jednak, czy lepsze znaczy smaczniejsze. Smak bowiem w porównaniu z ceną jest sprawą drugorzędną Wśród najczęściej spotykanych aromatów prym wiodą niewątpliwie jabłka (stąd tzw. jabol), a także wyjątkowe połączenie miodu z lipą. Jako że wino najczęściej spożywane jest na osłodę życia, nie powinno nikogo dziwić, że jest słodkie (ewentualnie półsłodkie)."
+    }
+  ],
+  "05.11.2024": [
+    {
+      "name": "Dzień Postaci z Bajek",
+      "description": "Kaczor Donald, Myszka Miki, Smerfy, Kubuś Puchatek, Bolek i Lolek i wiele innych postaci – to jest ich święto. W dzieciństwie dzięki nim poznawaliśmy świat, śmialiśmy się i wzruszaliśmy. W Międzynarodowy Dzień Postaci z Bajek warto sobie o nich przypomnieć, choćby poprzez wspólny bajkowy seans z własnymi dziećmi."
+    },
+    {
+      "name": "Międzynarodowy Dzień Języka Romskiego",
+      "description": "Język romski jako jeden z nielicznych na świecie nie posiada pisanej formy, a jego historia i tradycja przekazywane są ustnie. Święto ustanowione zostało z inicjatywy Międzynarodowego Związku Romów i organizacji „Kali Sara\" na posiedzeniu Komisji do Spraw Języka w Zagrzebiu 5 listopada 2009 roku."
+    }
+  ],
+  "06.11.2024": [
+    {
+      "name": "Międzynarodowy Dzień Zapobiegania Wyzyskowi Środowiska Naturalnego podczas Wojen i Konfliktów Zbrojnych",
+      "description": "Podczas wojny cierpią nie tylko ludzie, ale i środowisko przyrodnicze. Celem święta jest uświadomienie społeczeństwu, że w wyniku konfliktów zbrojnych zasoby naturalne zaburzone zostają na długi czas po ich ustaniu.\n\n"
+    },
+    {
+      "name": "Dzień Saksofonu",
+      "description": "Dzień Saksofonu daje idealną możliwość do promowania tego niezwykłego instrumentu wśród społeczeństwa. Świętowanie można odbyć w domowym zaciszu słuchając delikatnych, jazzowych brzmień w czterech kątach, albo wybrać się na koncert."
+    }
+  ],
+  "07.11.2024": [
+    {
+      "name": "Międzynarodowy Dzień Fizyki Medycznej",
+      "description": "Święto obchodzone jest od 2013 roku z inicjatywy Międzynarodowej Organizacji Fizyki Medycznej i ma na celu promować zagadnienia związane z fizyką medyczną. Ustanowiono je na dzień 7 listopada, na cześć wybitnej fizyczki i chemiczki Marii Skłodowskiej-Curie."
+    },
+    {
+      "name": "Światowy Dzień Feministek",
+      "description": "Feminizm to w największym skrócie walka o równouprawnienie kobiet i mężczyzn, mająca swoje korzenie w latach rewolucji francuskiej. Niech no dzisiaj tylko jakiś samiec opowie szowinistyczny dowcip..."
+    },
+    {
+      "name": "Dzień Kotleta Schabowego",
+      "description": "Schabowy odwiedza nas niemal w każda niedzielę i należy do bardzo lubianych gości. Dziś także powitajmy go z honorami! Warto też przyrządzić go w inny niż zazwyczaj sposób."
+    }
+  ],
+  "08.11.2024": [
+    {
+      "name": "Światowy Dzień Radiologii",
+      "description": "Święto upamiętnia Wilhelma Conrada Röntgena, który 8 listopada 1895 roku odkrył istnienie promieniowania. Dziś to jedna z ważniejszych i najszybciej rozwijających się dziedzin współczesnej medycyny."
+    },
+    {
+      "name": "Europejski Dzień Zdrowego Jedzenia i Gotowania",
+      "description": "Europejski Dzień Zdrowego Jedzenia i Gotowania (ang. „European Day of Healthy Food and Cooking”) został zainicjowany w 2007 roku przez Komisarza Unii Europejskiej i Euro- Toques- organizację zrzeszającą szefów kuchni. Celem święta jest promowanie zdrowego jedzenia wśród najmłodszych (i nie tylko), dobrych nawyków żywieniowych, spożywania regularnie posiłków, informowanie o konsekwencjach złej diety."
+    }
+  ],
+  "09.11.2024": [
+    {
+      "name": "Europejski Dzień Wynalazcy",
+      "description": "Dzień Wynalazcy został ustanowiony przez berlińskiego wynalazcę i przemysłowca Gerharda Muthenhallera. Jest ono hołdem dla Hedy Lamarr, która wynalazła system transmisji fal radiowych."
+    },
+    {
+      "name": "Światowy Dzień Gry Wstępnej",
+      "description": "Nie do końca wiadomo, kto ustanowił 9 listopada Dniem Gry Wstępnej. Być może kobiety, dla których takie preludium seksu ma szczególne znaczenie. Jako że mężczyźni są gotowi do współżycia praktycznie o każdej porze dnia i nocy, to często w ich gestii leży inicjacja intymności i nie tylko fizyczne, ale również mentalne podniecenie kobiety."
+    },
+    {
+      "name": "Międzynarodowy Dzień Walki z Faszyzmem i Antysemityzmem",
+      "description": "To święto upamiętnia pogrom Żydów w hitlerowskich Niemczech podczas tzw. „nocy kryształowej”. W nocy z 9 na 10 listopada 1938 roku w całym kraju palono synagogi, dewastowano cmentarze. Śmierć poniosło wówczas około 90 Żydów, a 35 tysięcy wysłano do obozów koncentracyjnych."
+    }
+  ],
+  "10.11.2024": [
+    {
+      "name": "Dzień Młodzieży",
+      "description": "W Dniu Młodzieży głośno mówi się o aktualnych problemach i wyzwaniach, z którymi muszą się mierzyć młodzi ludzie. Są to między innymi kłopoty na rynku pracy, wpływ młodzieży na możliwość globalnego rozwoju czy jakość życia nastolatków w dzisiejszych czasach."
+    },
+    {
+      "name": "Dzień Jeża",
+      "description": "Jeże pojawiły się na ziemi około 60 mln lat temu. Są jednymi z pierwszych ssaków, więc tym bardziej warto ochronić je przed losem, który spotkał dinozaury. Inaczej nasze dzieci będą mogły zobaczyć je jedynie w książce albo grze komputerowej. Dzień Jeża jest dobrą okazją do tego, by dowiedzieć się jak pomóc tym sympatycznym zwierzakom."
+    },
+    {
+      "name": "Światowy Dzień Nauki dla Pokoju i Rozwoju",
+      "description": "To święto ma za zadanie podkreślać zaangażowanie UNESCO w rozwój i propagowanie nauki. Ustanowiono je na Konferencji Generalnej ONZ do Spraw Oświaty, Nauki i Kultury w 2001 roku."
+    },
+    {
+      "name": "Międzynarodowy Dzień Łamańców Językowych",
+      "description": "Łamańce językowe – lubiane przez dzieci, ale też przez dorosłych, którzy uczą ich cudzoziemców. Wymagają dobrej dykcji i wymowy, ale czasami nawet to nie pomaga. Ich święto obchodzimy w drugą niedzielę listopada."
+    }
   ]
-
-
-
 
 }

@@ -11,6 +11,7 @@
         android:id="@+id/textViewHolidayName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:gravity="center"
         android:textSize="24sp"
         android:textStyle="bold"
         android:textColor="?attr/colorPrimary" />
@@ -20,8 +21,19 @@
         android:id="@+id/textViewHolidayDescription"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:gravity="center"
         android:textSize="18sp"
         android:layout_marginTop="16dp"/>
+
+    <!-- Przycisk dodania do ulubionych -->
+    <Button
+        android:id="@+id/btnAddToFavorites"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Dodaj do ulubionych"
+        android:layout_marginTop="24dp"
+        android:backgroundTint="?attr/colorPrimary"
+        android:textColor="@android:color/white" />
 
     <!-- Przycisk powrotu -->
     <Button
