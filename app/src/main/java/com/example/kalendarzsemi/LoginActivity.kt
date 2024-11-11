@@ -7,6 +7,7 @@ import android.text.method.PasswordTransformationMethod
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.preference.PreferenceManager
@@ -68,6 +69,12 @@ class LoginActivity : AppCompatActivity() {
         val btnGoToRegister = findViewById<Button>(R.id.btnGoToRegister)
         btnGoToRegister.setOnClickListener {
             startActivity(Intent(this, RegisterActivity::class.java))
+        }
+
+        val forgotPasswordText = findViewById<TextView>(R.id.tvForgotPassword)
+        forgotPasswordText.setOnClickListener {
+            val intent = Intent(this, ResetPasswordActivity::class.java)
+            startActivity(intent)
         }
 
         // Przycisk "Wróć" do MainActivity
