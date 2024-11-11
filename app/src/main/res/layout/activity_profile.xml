@@ -66,14 +66,14 @@
     <!-- Przycisk edycji profilu -->
     <Button
         android:id="@+id/editProfileButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="149dp"
+        android:layout_height="63dp"
         android:layout_below="@+id/showFavoritesButton"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="144dp"
+        android:layout_marginStart="135dp"
         android:layout_marginTop="155dp"
-        android:layout_marginEnd="142dp"
+        android:layout_marginEnd="135dp"
         android:backgroundTint="@color/blue_primary"
         android:text="Edytuj Profil"
         android:textColor="@android:color/white" />
