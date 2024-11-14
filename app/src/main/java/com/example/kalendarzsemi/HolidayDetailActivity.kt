@@ -22,13 +22,13 @@ class HolidayDetailActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
-        // Wczytanie preferencji kolorystycznych
-        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
+        // Ustawienie motywu na podstawie preferencji użytkownika
+        val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
         val themePreference = sharedPreferences.getString("theme_preference", "blue")
         when (themePreference) {
-            "blue" -> setTheme(R.style.Theme_KalendarzSemi_Blue)
-            "green" -> setTheme(R.style.Theme_KalendarzSemi_Green)
-            "red" -> setTheme(R.style.Theme_KalendarzSemi_Red)
+            "blue" -> setTheme(R.style.Theme_KalendarzSemi_Light)
+            "green" -> setTheme(R.style.Theme_KalendarzSemi_Dark)
+            "red" -> setTheme(R.style.Theme_KalendarzSemi_Vibrant)
         }
 
         super.onCreate(savedInstanceState)

@@ -24,27 +24,25 @@
     <RadioGroup
         android:id="@+id/radioGroupTheme"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginTop="10dp">
+        android:layout_height="wrap_content">
 
         <RadioButton
-            android:id="@+id/rbBlue"
+            android:id="@+id/rbLight"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Niebieski" />
+            android:text="Light Theme" />
 
         <RadioButton
-            android:id="@+id/rbGreen"
+            android:id="@+id/rbDark"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Zielony" />
+            android:text="Dark Theme" />
 
         <RadioButton
-            android:id="@+id/rbRed"
+            android:id="@+id/rbCustom"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Czerwony" />
+            android:text="Custom Theme" />
     </RadioGroup>
 
     <View

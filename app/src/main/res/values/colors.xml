@@ -1,16 +1,25 @@
 <resources>
-    <!-- Niebieski -->
-    <color name="blue_primary">#2196F3</color>
-    <color name="blue_primary_dark">#1976D2</color>
-    <color name="blue_accent">#448AFF</color>
+    <!-- Light Theme Colors -->
+    <color name="background_color_light">#FFFFFF</color>
+    <color name="primary_text_color_light">#000000</color>
+    <color name="secondary_text_color_light">#757575</color>
+    <color name="button_color_light">#448AFF</color>
 
-    <!-- Zielony -->
-    <color name="green_primary">#4CAF50</color>
-    <color name="green_primary_dark">#388E3C</color>
-    <color name="green_accent">#69F0AE</color>
+    <!-- Dark Theme Colors -->
+    <color name="background_color_dark">#121212</color>
+    <color name="primary_text_color_dark">#FFFFFF</color>
+    <color name="secondary_text_color_dark">#B0B0B0</color>
+    <color name="button_color_dark">#FF4081</color>
 
-    <!-- Czerwony -->
-    <color name="red_primary">#F44336</color>
-    <color name="red_primary_dark">#D32F2F</color>
-    <color name="red_accent">#FF5252</color>
+    <!-- Vibrant Theme Colors -->
+    <color name="background_color_vibrant">#FFEB3B</color>
+    <color name="primary_text_color_vibrant">#000000</color>
+    <color name="secondary_text_color_vibrant">#757575</color>
+    <color name="button_color_vibrant">#D32F2F</color>
+
+    <color name="blue_primary">#2196F3</color> <!-- Light Blue -->
+    <color name="blue_primary_dark">#1976D2</color> <!-- Darker Blue -->
+    <color name="blue_primary_light">#BBDEFB</color> <!-- Lighter Blue -->
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
 </resources>

@@ -1,24 +1,28 @@
 <resources>
-
-    <!-- Domyślny motyw (niebieski) -->
-    <style name="Theme.KalendarzSemi.Blue" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="colorPrimary">@color/blue_primary</item>
-        <item name="colorPrimaryDark">@color/blue_primary_dark</item>
-        <item name="colorAccent">@color/blue_accent</item>
+    <!-- Light Theme -->
+    <style name="Theme.KalendarzSemi.Light" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/background_color_light</item>
+        <item name="colorPrimaryDark">@color/background_color_light</item>
+        <item name="colorAccent">@color/button_color_light</item>
+        <item name="android:textColorPrimary">@color/primary_text_color_light</item>
+        <item name="android:textColorSecondary">@color/secondary_text_color_light</item>
     </style>
 
-    <!-- Zielony motyw -->
-    <style name="Theme.KalendarzSemi.Green" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="colorPrimary">@color/green_primary</item>
-        <item name="colorPrimaryDark">@color/green_primary_dark</item>
-        <item name="colorAccent">@color/green_accent</item>
+    <!-- Dark Theme -->
+    <style name="Theme.KalendarzSemi.Dark" parent="Theme.AppCompat.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/background_color_dark</item>
+        <item name="colorPrimaryDark">@color/background_color_dark</item>
+        <item name="colorAccent">@color/button_color_dark</item>
+        <item name="android:textColorPrimary">@color/primary_text_color_dark</item>
+        <item name="android:textColorSecondary">@color/secondary_text_color_dark</item>
     </style>
 
-    <!-- Czerwony motyw -->
-    <style name="Theme.KalendarzSemi.Red" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="colorPrimary">@color/red_primary</item>
-        <item name="colorPrimaryDark">@color/red_primary_dark</item>
-        <item name="colorAccent">@color/red_accent</item>
+    <!-- Vibrant Theme -->
+    <style name="Theme.KalendarzSemi.Vibrant" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/background_color_vibrant</item>
+        <item name="colorPrimaryDark">@color/background_color_vibrant</item>
+        <item name="colorAccent">@color/button_color_vibrant</item>
+        <item name="android:textColorPrimary">@color/primary_text_color_vibrant</item>
+        <item name="android:textColorSecondary">@color/secondary_text_color_vibrant</item>
     </style>
-
 </resources>

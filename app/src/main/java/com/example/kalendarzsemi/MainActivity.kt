@@ -1,6 +1,7 @@
 package com.example.kalendarzsemi
 
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
@@ -8,14 +9,16 @@ import androidx.preference.PreferenceManager
 
 class MainActivity : AppCompatActivity() {
 
+    private lateinit var sharedPreferences: SharedPreferences
+
     override fun onCreate(savedInstanceState: Bundle?) {
         // Sprawdzenie preferencji użytkownika i ustawienie odpowiedniego motywu
-        val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
-        val themePreference = sharedPreferences.getString("theme_preference", "blue")
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
+        val themePreference = sharedPreferences.getString("theme_preference", "light")
         when (themePreference) {
-            "blue" -> setTheme(R.style.Theme_KalendarzSemi_Blue)
-            "green" -> setTheme(R.style.Theme_KalendarzSemi_Green)
-            "red" -> setTheme(R.style.Theme_KalendarzSemi_Red)
+            "light" -> setTheme(R.style.Theme_KalendarzSemi_Light)
+            "dark" -> setTheme(R.style.Theme_KalendarzSemi_Dark)
+            "vibrant" -> setTheme(R.style.Theme_KalendarzSemi_Vibrant)
         }
 
         super.onCreate(savedInstanceState)

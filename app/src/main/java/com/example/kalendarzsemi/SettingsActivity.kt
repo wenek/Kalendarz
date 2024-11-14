@@ -37,51 +37,47 @@ class SettingsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         Log.d(TAG, "onCreate: SettingsActivity started")
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
-        val themePreference = sharedPreferences.getString("theme_preference", "blue")
+        val themePreference = sharedPreferences.getString("theme_preference", "light")
         when (themePreference) {
-            "blue" -> setTheme(R.style.Theme_KalendarzSemi_Blue)
-            "green" -> setTheme(R.style.Theme_KalendarzSemi_Green)
-            "red" -> setTheme(R.style.Theme_KalendarzSemi_Red)
-        }
-
-        // Logowanie podczas sprawdzania uprawnień do powiadomień
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            if (checkSelfPermission(android.Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
-                Log.d(TAG, "onCreate: Requesting POST_NOTIFICATIONS permission")
-                requestPermissions(arrayOf(android.Manifest.permission.POST_NOTIFICATIONS), REQUEST_CODE)
-            } else {
-                Log.d(TAG, "onCreate: POST_NOTIFICATIONS permission already granted")
-            }
+            "light" -> setTheme(R.style.Theme_KalendarzSemi_Light)
+            "dark" -> setTheme(R.style.Theme_KalendarzSemi_Dark)
+            "vibrant" -> setTheme(R.style.Theme_KalendarzSemi_Vibrant)
         }
 
         super.onCreate(savedInstanceState)
         binding = ActivitySettingsBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        // Display previously saved notification time
         displaySaveNotification()
 
-        // Theme handling
-        val savedTheme = sharedPreferences.getString("theme_preference", "blue")
+        // Set the radio buttons based on the saved theme preference
+        val savedTheme = sharedPreferences.getString("theme_preference", "light")
         when (savedTheme) {
-            "blue" -> binding.rbBlue.isChecked = true
-            "green" -> binding.rbGreen.isChecked = true
-            "red" -> binding.rbRed.isChecked = true
+            "light" -> binding.rbLight.isChecked = true
+            "dark" -> binding.rbDark.isChecked = true
+            "vibrant" -> binding.rbCustom.isChecked = true
         }
 
+        // Handle theme change when radio button is selected
         binding.radioGroupTheme.setOnCheckedChangeListener { _, checkedId ->
             val theme = when (checkedId) {
-                R.id.rbBlue -> "blue"
-                R.id.rbGreen -> "green"
-                R.id.rbRed -> "red"
-                else -> "blue"
+                R.id.rbLight -> "light"
+                R.id.rbDark -> "dark"
+                R.id.rbCustom -> "vibrant"
+                else -> "light"
             }
             saveThemePreference(theme)
-            recreate()
+
+            // After changing the theme, restart MainActivity with the updated theme
+            restartMainActivityWithTheme()
         }
 
         // Button handling
         binding.btnReturn.setOnClickListener { finish() }
         createNotificationChannel()
+
+        // Schedule daily notifications
         binding.btnSaveNotification.setOnClickListener {
             Log.d(TAG, "btnSaveNotification: Scheduling daily notification")
             scheduleDailyNotification()
@@ -155,7 +151,6 @@ class SettingsActivity : AppCompatActivity() {
     }
 
     private fun showAlert(time: Long, title: String, message: String) {
-
         AlertDialog.Builder(this)
             .setTitle("Powiadomienie")
             .setMessage("Title: $title\nMessage: $message\n")
@@ -184,13 +179,11 @@ class SettingsActivity : AppCompatActivity() {
     }
 
     private fun saveNotificationTime(timeInMillis: Long) {
-        // Zapisywanie godziny powiadomienia w SharedPreferences
         sharedPreferences.edit().putLong("notification_time", timeInMillis).apply()
         Log.d(TAG, "saveNotificationTime: Notification time saved as $timeInMillis")
     }
 
     private fun formatTime(timeInMillis: Long): String {
-        // Formatowanie godziny na czytelny tekst
         val dateFormat = SimpleDateFormat("HH:mm", Locale.getDefault())
         return dateFormat.format(Date(timeInMillis))
     }
@@ -198,4 +191,12 @@ class SettingsActivity : AppCompatActivity() {
     private fun saveThemePreference(theme: String) {
         sharedPreferences.edit().putString("theme_preference", theme).apply()
     }
+
+    // Function to restart MainActivity with the new theme
+    private fun restartMainActivityWithTheme() {
+        val intent = Intent(this, MainActivity::class.java)
+        startActivity(intent)
+        finish() // Close the current SettingsActivity
+    }
 }
+

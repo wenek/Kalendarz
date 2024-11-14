@@ -1,3 +1,8 @@
 <resources>
-    <string name="app_name">KalendarzSemi</string>
+    <string name="app_name">Kalendarz Semi</string>
+    <string name="greeting_message">Witaj w aplikacji Kalendarz Semi</string>
+    <string name="login_button">Logowanie</string>
+    <string name="register_button">Rejestracja</string>
+    <string name="calendar_button">Kalendarz</string>
+    <string name="settings_button">Ustawienia</string>
 </resources>

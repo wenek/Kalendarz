@@ -1,63 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?attr/colorPrimary"
     tools:context=".MainActivity">
 
+    <!-- Main greeting text -->
     <TextView
         android:id="@+id/tvMain"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Witaj w aplikacji Kalendarz Semi"
-        android:textSize="20sp"
+        android:text="@string/greeting_message"
+        android:textSize="24sp"
+        android:textColor="?android:attr/colorAccent"
+        android:textStyle="bold"
+        android:shadowColor="#000000"
+        android:shadowDx="2"
+        android:shadowDy="2"
+        android:shadowRadius="2"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="40dp"/>
 
+    <!-- Login button -->
     <Button
         android:id="@+id/btnLogin"
-        android:layout_width="129dp"
-        android:layout_height="59dp"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="104dp"
-        android:text="Logowanie"
+        android:padding="12dp"
+        android:textColor="?android:attr/textColorPrimary"
+        android:text="@string/login_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvMain" />
 
+    <!-- Register button -->
     <Button
         android:id="@+id/btnRegister"
-        android:layout_width="135dp"
-        android:layout_height="54dp"
-        android:layout_marginTop="44dp"
-        android:text="Rejestracja"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:padding="12dp"
+        android:textColor="?android:attr/textColorPrimary"
+        android:text="@string/register_button"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnLogin" />
 
+    <!-- Calendar button -->
     <Button
         android:id="@+id/btnCalendar"
-        android:layout_width="123dp"
-        android:layout_height="61dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="64dp"
-        android:layout_marginEnd="20dp"
-        android:text="Kalendarz"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:padding="12dp"
+        android:textColor="?android:attr/textColorPrimary"
+        android:text="@string/calendar_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnRegister" />
 
+    <!-- Settings button -->
     <Button
         android:id="@+id/btnOpenSettings"
-        android:layout_width="wrap_content"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="164dp"
-        android:text="Ustawienia"
+        android:layout_marginTop="24dp"
+        android:padding="12dp"
+        android:textColor="?android:attr/textColorPrimary"
+        android:text="@string/settings_button"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnCalendar" />
 
