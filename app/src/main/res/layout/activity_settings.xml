@@ -64,17 +64,6 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp">
 
-        <DatePicker
-            android:id="@+id/datePicker"
-            android:layout_width="60dp"
-            android:layout_height="match_parent"
-            android:layout_marginHorizontal="-30dp"
-            android:layout_weight="1"
-            android:calendarViewShown="false"
-            android:datePickerMode="spinner"
-            android:gravity="center"
-            android:scaleX="0.7"
-            android:scaleY="0.7" />
         <TimePicker
             android:id="@+id/timePicker"
             android:layout_width="0dp"
@@ -82,12 +71,19 @@
             android:layout_height="wrap_content"
             android:timePickerMode="spinner"
             android:gravity="center"
-            android:scaleX="0.7"
-            android:scaleY="0.7"
+            android:scaleX="1"
+            android:scaleY="1"
             android:layout_marginHorizontal="-30dp"
             />
-
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/tvNotificationTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Aktualny czas powiadomienia:"
+        android:textSize="16sp"
+        android:layout_gravity="center"/>
 
     <Button
         android:id="@+id/btnSaveNotification"
