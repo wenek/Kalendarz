@@ -1,100 +1,106 @@
-<?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="16dp"
-    android:gravity="center">
+    android:gravity="center"
+    android:background="?attr/colorPrimary">
 
     <TextView
         android:id="@+id/tvLogin"
-        android:layout_width="168dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="75dp"
-        android:layout_marginEnd="75dp"
-        android:gravity="center"
+        android:layout_centerHorizontal="true"
         android:layout_marginBottom="20dp"
-        android:text="Zaloguj się"
+        android:text="@string/login_screen_title"
         android:textSize="30sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:textColor="?android:attr/colorAccent" />
 
     <EditText
-        android:id="@+id/etUsername"
-        android:layout_width="378dp"
-        android:layout_height="60dp"
-        android:layout_below="@+id/tvLogin"
-        android:layout_marginTop="30dp"
-        android:layout_marginBottom="10dp"
-        android:autofillHints="Email"
-        android:hint="Email"
-        android:inputType="textEmailAddress" />
+        android:id="@+id/etEmail"
+        android:layout_width="480dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvLogin"
+        android:layout_marginTop="16dp"
+        android:autofillHints="@string/email_hint"
+        android:hint="@string/email_hint"
+        android:inputType="textEmailAddress"
+        android:padding="12dp"
+        android:backgroundTint="?android:attr/colorAccent"
+        android:textColorHint="?android:attr/textColorPrimary"
+        android:textColor="?android:attr/textColorPrimary" />
 
     <EditText
         android:id="@+id/etPassword"
-        android:layout_width="379dp"
-        android:layout_height="66dp"
-        android:layout_below="@+id/etUsername"
-        android:hint="Hasło"
-        android:inputType="textPassword" />
+        android:layout_width="480dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/etEmail"
+        android:layout_marginTop="16dp"
+        android:autofillHints="@string/password_hint"
+        android:hint="@string/password_hint"
+        android:inputType="textPassword"
+        android:padding="12dp"
+        android:backgroundTint="?android:attr/colorAccent"
+        android:textColorHint="?android:attr/textColorPrimary"
+        android:textColor="?android:attr/textColorPrimary" />
 
     <ImageView
         android:id="@+id/showPasswordIcon"
-        android:layout_width="39dp"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/btnSubmit"
-        android:layout_alignParentEnd="true"
-        android:layout_marginBottom="15dp"
-        android:contentDescription="Pokaż/Ukryj hasło"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_below="@+id/etEmail"
+        android:layout_alignEnd="@id/etPassword"
+        android:layout_marginTop="27dp"
+        android:layout_marginEnd="4dp"
+        android:contentDescription="@string/show_password"
         android:src="@drawable/baseline_visibility_24" />
 
     <Button
         android:id="@+id/btnSubmit"
-        android:layout_width="136dp"
+        android:layout_width="120dp"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/etPassword"
+        android:layout_below="@id/etPassword"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="10dp"
-        android:text="Zaloguj" />
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="?android:attr/colorAccent"
+        android:text="@string/login_button"
+        android:textColor="?android:attr/textColorPrimary" />
 
     <Button
         android:id="@+id/btnGoToRegister"
-        android:layout_width="183dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/etPassword"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="70dp"
-        android:layout_marginTop="10dp"
-        android:layout_toEndOf="@+id/btnSubmit"
-        android:text="Zarejestruj się" />
-
-
-    <Button
-        android:id="@+id/btnReturnToMain"
-        android:layout_width="139dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/tvForgotPassword"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="140dp"
-        android:layout_marginTop="40dp"
-        android:layout_marginEnd="140dp"
-        android:text="Wróć" />
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:backgroundTint="?android:attr/colorAccent"
+        android:text="@string/register_button"
+        android:textColor="?android:attr/textColorPrimary" />
 
     <TextView
         android:id="@+id/tvForgotPassword"
         android:layout_width="wrap_content"
-        android:layout_height="34dp"
-        android:layout_below="@+id/etPassword"
-        android:layout_alignParentStart="true"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btnGoToRegister"
+        android:layout_marginTop="15dp"
+        android:layout_centerHorizontal="true"
+        android:text="@string/forgot_password_question"
+        android:textColor="?android:attr/colorAccent"
+        android:textSize="14sp" />
+
+    <Button
+        android:id="@+id/btnReturnToMain"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvForgotPassword"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="100dp"
-        android:gravity="center"
-        android:layout_marginTop="166dp"
-        android:layout_marginEnd="100dp"
-        android:text="Zapomniałeś hasła?" />
-
-
+        android:layout_marginTop="250dp"
+        android:layout_marginEnd="30dp"
+        android:backgroundTint="?android:attr/colorAccent"
+        android:text="@string/back_button"
+        android:textColor="?android:attr/textColorPrimary" />
 </RelativeLayout>

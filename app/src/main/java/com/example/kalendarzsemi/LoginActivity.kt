@@ -22,11 +22,11 @@ class LoginActivity : AppCompatActivity() {
         // Ustawienie motywu kolorystycznego
         // Ustawienie motywu na podstawie preferencji użytkownika
         val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
-        val themePreference = sharedPreferences.getString("theme_preference", "blue")
+        val themePreference = sharedPreferences.getString("theme_preference", "light")
         when (themePreference) {
-            "blue" -> setTheme(R.style.Theme_KalendarzSemi_Light)
-            "green" -> setTheme(R.style.Theme_KalendarzSemi_Dark)
-            "red" -> setTheme(R.style.Theme_KalendarzSemi_Vibrant)
+            "light" -> setTheme(R.style.Theme_KalendarzSemi_Light)
+            "dark" -> setTheme(R.style.Theme_KalendarzSemi_Dark)
+            "vibrant" -> setTheme(R.style.Theme_KalendarzSemi_Vibrant)
         }
 
         super.onCreate(savedInstanceState)
@@ -35,10 +35,11 @@ class LoginActivity : AppCompatActivity() {
         // Inicjalizacja Firebase Auth
         auth = FirebaseAuth.getInstance()
 
-        val emailField = findViewById<EditText>(R.id.etUsername)
+        val emailField = findViewById<EditText>(R.id.etEmail)
         val passwordField = findViewById<EditText>(R.id.etPassword)
         val showPasswordIcon = findViewById<ImageView>(R.id.showPasswordIcon)
         val loginButton = findViewById<Button>(R.id.btnSubmit)
+
 
         // Logika dla przycisku pokazania/ukrycia hasła
         showPasswordIcon.setOnClickListener {

@@ -2,11 +2,14 @@ package com.example.kalendarzsemi
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.InputType
 import android.util.Log
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.preference.PreferenceManager
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
@@ -17,7 +20,19 @@ class RegisterActivity : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
     private lateinit var database: DatabaseReference
 
+    // Flagi dla pól hasła
+    private var isPasswordVisible = false
+    private var isConfirmPasswordVisible = false
+
     override fun onCreate(savedInstanceState: Bundle?) {
+        val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
+        val themePreference = sharedPreferences.getString("theme_preference", "light")
+        when (themePreference) {
+            "light" -> setTheme(R.style.Theme_KalendarzSemi_Light)
+            "dark" -> setTheme(R.style.Theme_KalendarzSemi_Dark)
+            "vibrant" -> setTheme(R.style.Theme_KalendarzSemi_Vibrant)
+        }
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
 
@@ -29,8 +44,22 @@ class RegisterActivity : AppCompatActivity() {
         val emailField = findViewById<EditText>(R.id.etEmail)
         val passwordField = findViewById<EditText>(R.id.etPassword)
         val passwordConfirmField = findViewById<EditText>(R.id.etConfirmPassword)
+        val passwordToggle = findViewById<ImageView>(R.id.showPasswordIcon)
+        val confirmPasswordToggle = findViewById<ImageView>(R.id.showConfirmPasswordIcon)
         val registerButton = findViewById<Button>(R.id.btnRegister)
         val returnToLoginButton = findViewById<Button>(R.id.btnReturnToLogin)
+
+        // Obsługa przycisku przełączania widoczności hasła
+        passwordToggle.setOnClickListener {
+            isPasswordVisible = !isPasswordVisible
+            togglePasswordVisibility(passwordField, isPasswordVisible, passwordToggle)
+        }
+
+        // Obsługa przycisku przełączania widoczności potwierdzenia hasła
+        confirmPasswordToggle.setOnClickListener {
+            isConfirmPasswordVisible = !isConfirmPasswordVisible
+            togglePasswordVisibility(passwordConfirmField, isConfirmPasswordVisible, confirmPasswordToggle)
+        }
 
         // Obsługa przycisku rejestracji
         registerButton.setOnClickListener {
@@ -56,6 +85,19 @@ class RegisterActivity : AppCompatActivity() {
             startActivity(intent)
             finish() // Zamyka ekran rejestracji
         }
+    }
+
+    // Funkcja do przełączania widoczności hasła
+    private fun togglePasswordVisibility(editText: EditText, isVisible: Boolean, toggleIcon: ImageView) {
+        if (isVisible) {
+            editText.inputType = InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD
+            toggleIcon.setImageResource(R.drawable.baseline_visibility_off_24) // Ikona 'ukryj hasło'
+        } else {
+            editText.inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
+            toggleIcon.setImageResource(R.drawable.baseline_visibility_24) // Ikona 'pokaż hasło'
+        }
+        // Ustawienie kursora na końcu tekstu
+        editText.setSelection(editText.text.length)
     }
 
     // Funkcja do rejestracji użytkownika za pomocą Firebase

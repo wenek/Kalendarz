@@ -1,8 +1,21 @@
 <resources>
-    <string name="app_name">Kalendarz Semi</string>
-    <string name="greeting_message">Witaj w aplikacji Kalendarz Semi</string>
+    <string name="app_name">Nietypowy Kalendarz</string>
+    <string name="greeting_message">Witaj w aplikacji</string>
     <string name="login_button">Logowanie</string>
     <string name="register_button">Rejestracja</string>
     <string name="calendar_button">Kalendarz</string>
     <string name="settings_button">Ustawienia</string>
+    <string name="show_password">Pokaż hasło</string>
+    <string name="hide_password">Ukryj hasło</string>
+    <string name="username_hint">Nazwa użytkownika</string>
+    <string name="password_hint">Hasło</string>
+    <string name="email_hint">Email</string>
+    <string name="name_hint">Imię</string>
+    <string name="surname_hint">Nazwisko</string>
+    <string name="login_screen_title">Logowanie</string>"
+    <string name="register_screen_title">Rejestracja</string>
+    <string name="forgot_password_question">Nie pamiętasz hasła?</string>"
+    <string name="back_button">Wróć</string>
+    <string name="confirm_password_hint">Potwierdź hasło</string>
+    <string name="back_to_login">Wróć do logowania</string>
 </resources>
