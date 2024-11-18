@@ -6,7 +6,6 @@ import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
-import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
@@ -70,7 +69,7 @@ class SettingsActivity : AppCompatActivity() {
             saveThemePreference(theme)
 
             // After changing the theme, restart MainActivity with the updated theme
-            restartMainActivityWithTheme()
+            restartCalendarActivityWithTheme()
         }
 
         // Button handling
@@ -193,8 +192,8 @@ class SettingsActivity : AppCompatActivity() {
     }
 
     // Function to restart MainActivity with the new theme
-    private fun restartMainActivityWithTheme() {
-        val intent = Intent(this, MainActivity::class.java)
+    private fun restartCalendarActivityWithTheme() {
+        val intent = Intent(this, CalendarActivity::class.java)
         startActivity(intent)
         finish() // Close the current SettingsActivity
     }

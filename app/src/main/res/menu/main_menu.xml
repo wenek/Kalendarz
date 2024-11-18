@@ -1,29 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <group>
         <item android:id="@+id/home"
             android:icon="@drawable/baseline_home_24"
-            android:title="Profile">
+            android:title="@string/profile">
         </item>
         <item android:id="@+id/calendar"
             android:icon="@drawable/baseline_calendar_today_24"
-            android:title="Calendar">
+            android:title="@string/calendar_title">
         </item>
         <item android:id="@+id/settings"
             android:icon="@drawable/baseline_settings_24"
-            android:title="Settings">
+            android:title="@string/settings">
         </item>
         <item android:id="@+id/about"
             android:icon="@drawable/baseline_info_24"
-            android:title="About">
+            android:title="@string/about">
         </item>
         <item android:id="@+id/exit"
             android:icon="@drawable/baseline_close_24"
-            android:title="Exit">
+            android:title="@string/exit">
         </item>
         <item android:id="@+id/logout"
             android:icon="@drawable/baseline_logout_24"
-            android:title="Wyloguj">
+            android:title="@string/logout">
         </item>
 
     </group>

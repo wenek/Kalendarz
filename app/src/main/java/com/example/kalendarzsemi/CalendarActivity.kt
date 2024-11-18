@@ -1,16 +1,15 @@
 package com.example.kalendarzsemi
 
+import android.app.DatePickerDialog
 import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.Button
-import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
 import androidx.preference.PreferenceManager
 import com.google.firebase.auth.FirebaseAuth
+import com.example.kalendarzsemi.databinding.ActivityCalendarBinding
 import org.json.JSONObject
 import java.io.BufferedReader
 import java.io.InputStreamReader
@@ -20,43 +19,41 @@ import java.util.*
 class CalendarActivity : AppCompatActivity() {
 
     private lateinit var currentDate: Calendar
-    private lateinit var holidaysContainer: LinearLayout
-    private lateinit var dateTextView: TextView
+    private lateinit var binding: ActivityCalendarBinding // Inicjalizacja zmiennej do ViewBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
-        // Ustawienie motywu na podstawie preferencji użytkownika
+        // Wczytanie preferencji motywu
         val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
-        val themePreference = sharedPreferences.getString("theme_preference", "blue")
+        val themePreference = sharedPreferences.getString("theme_preference", "light")
         when (themePreference) {
-            "blue" -> setTheme(R.style.Theme_KalendarzSemi_Light)
-            "green" -> setTheme(R.style.Theme_KalendarzSemi_Dark)
-            "red" -> setTheme(R.style.Theme_KalendarzSemi_Vibrant)
+            "light" -> setTheme(R.style.Theme_KalendarzSemi_Light)
+            "dark" -> setTheme(R.style.Theme_KalendarzSemi_Dark)
+            "vibrant" -> setTheme(R.style.Theme_KalendarzSemi_Vibrant)
         }
 
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_calendar)
+        binding = ActivityCalendarBinding.inflate(layoutInflater) // Tworzenie obiektu ViewBinding
+        setContentView(binding.root) // Ustawienie widoku
 
         // Konfiguracja Toolbar
-        val toolbar = findViewById<Toolbar>(R.id.toolbar)
+        val toolbar = binding.toolbar // Zamiast findViewById, korzystamy z viewBinding
         setSupportActionBar(toolbar)
-
-        holidaysContainer = findViewById(R.id.holidaysContainer)
-        dateTextView = findViewById(R.id.tvDate)
 
         currentDate = Calendar.getInstance()
         updateCalendar()
 
         // Obsługa przycisków do zmiany daty
-        val btnPreviousDay = findViewById<Button>(R.id.btnPreviousDay)
-        val btnNextDay = findViewById<Button>(R.id.btnNextDay)
-
-        btnPreviousDay.setOnClickListener {
+        binding.btnPreviousDay.setOnClickListener { // Zamiast findViewById
             changeDay(-1)
         }
 
-        btnNextDay.setOnClickListener {
+        binding.btnNextDay.setOnClickListener { // Zamiast findViewById
             changeDay(1)
+        }
+
+        binding.btnSearchDate.setOnClickListener {
+            openDatePicker()
         }
     }
 
@@ -94,8 +91,7 @@ class CalendarActivity : AppCompatActivity() {
                 true
             }
             R.id.exit -> {
-                // Obsługa kliknięcia "Exit"
-                finish()
+                finish() // Obsługa kliknięcia "Exit"
                 true
             }
             R.id.logout -> {
@@ -111,6 +107,26 @@ class CalendarActivity : AppCompatActivity() {
         }
     }
 
+    // Funkcja otwierająca dialog do wyboru daty
+    private fun openDatePicker() {
+        val calendar = Calendar.getInstance()
+        val datePickerDialog = DatePickerDialog(
+            this,
+            DatePickerDialog.OnDateSetListener { _, year, month, dayOfMonth ->
+                // Zaktualizuj kalendarz po wybraniu daty
+                val selectedDate = Calendar.getInstance()
+                selectedDate.set(year, month, dayOfMonth)
+                currentDate = selectedDate
+                updateCalendar()
+            },
+            calendar.get(Calendar.YEAR),
+            calendar.get(Calendar.MONTH),
+            calendar.get(Calendar.DAY_OF_MONTH)
+        )
+
+        datePickerDialog.show()
+    }
+
     // Funkcja do zmiany dnia
     private fun changeDay(amount: Int) {
         currentDate.add(Calendar.DAY_OF_YEAR, amount)
@@ -122,10 +138,10 @@ class CalendarActivity : AppCompatActivity() {
         val formattedDate = dateFormat.format(currentDate.time)
 
         // Update date view
-        dateTextView.text = formattedDate
+        binding.tvDate.text = formattedDate // Zamiast findViewById
 
         // Clear previous holiday views
-        holidaysContainer.removeAllViews()
+        binding.holidaysContainer.removeAllViews() // Zamiast findViewById
 
         // Load holidays for the selected date
         val holidays = loadHolidaysForDate(formattedDate)
@@ -143,10 +159,9 @@ class CalendarActivity : AppCompatActivity() {
                     startActivity(intent)
                 }
             }
-            holidaysContainer.addView(holidayTextView)
+            binding.holidaysContainer.addView(holidayTextView)
         }
     }
-
 
     private fun loadHolidaysForDate(date: String): List<Triple<String, String, String>> {
         val holidaysList = mutableListOf<Triple<String, String, String>>()
@@ -166,11 +181,11 @@ class CalendarActivity : AppCompatActivity() {
         return holidaysList
     }
 
-
     // Funkcja do ładowania pliku JSON z zasobów raw
     private fun loadJsonFromRaw(resourceId: Int): String {
         val inputStream = resources.openRawResource(resourceId)
         val reader = BufferedReader(InputStreamReader(inputStream))
         return reader.use { it.readText() }
     }
+
 }

@@ -1,108 +1,127 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="16dp">
-
-    <TextView
-        android:id="@+id/tvSettingsTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Ustawienia"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        android:layout_marginBottom="20dp" />
-
-    <TextView
-        android:id="@+id/tvTheme"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Wybierz kolorystykę aplikacji"
-        android:textSize="18sp" />
-
-    <RadioGroup
-        android:id="@+id/radioGroupTheme"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-
-        <RadioButton
-            android:id="@+id/rbLight"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Light Theme" />
-
-        <RadioButton
-            android:id="@+id/rbDark"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Dark Theme" />
-
-        <RadioButton
-            android:id="@+id/rbCustom"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Custom Theme" />
-    </RadioGroup>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@android:color/darker_gray"/>
-
-    <TextView
-        android:id="@+id/tvNotifications"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Powiadomienia"
-        android:textSize="18sp" />
+    android:padding="16dp"
+    android:background="?attr/colorPrimary">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp">
+        android:orientation="vertical"
+        android:gravity="center">
+
+        <!-- Tytuł sekcji ustawień -->
+        <TextView
+            android:id="@+id/tvSettingsTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/settings"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="20dp"
+            android:textColor="?android:attr/textColorPrimary" />
+
+        <!-- Wybór kolorystyki aplikacji -->
+        <TextView
+            android:id="@+id/tvTheme"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/color_settings"
+            android:textSize="18sp"
+            android:layout_marginBottom="8dp"
+            android:textColor="@android:color/black" />
+
+        <RadioGroup
+            android:id="@+id/radioGroupTheme"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginBottom="20dp">
+
+            <RadioButton
+                android:id="@+id/rbLight"
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:text="@string/light_theme"
+                android:layout_marginStart="16dp" />
+
+            <RadioButton
+                android:id="@+id/rbDark"
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:text="@string/dark_theme"
+                android:layout_marginStart="16dp" />
+
+            <RadioButton
+                android:id="@+id/rbCustom"
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:text="@string/vibrant_theme"
+                android:layout_marginStart="16dp" />
+        </RadioGroup>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="?attr/colorPrimary"
+            android:layout_marginVertical="16dp" />
+
+        <!-- Sekcja powiadomień -->
+        <TextView
+            android:id="@+id/tvNotifications"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/notifications_settings"
+            android:textSize="18sp"
+            android:layout_marginBottom="8dp"
+            android:textColor="?android:attr/textColorPrimary" />
 
         <TimePicker
             android:id="@+id/timePicker"
-            android:layout_width="0dp"
-            android:layout_weight="1"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:timePickerMode="spinner"
-            android:gravity="center"
-            android:scaleX="1"
-            android:scaleY="1"
-            android:layout_marginHorizontal="-30dp"
-            />
+            android:layout_gravity="center"
+            android:layout_marginBottom="12dp" />
+
+        <TextView
+            android:id="@+id/tvNotificationTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/notification_time"
+            android:textSize="16sp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="12dp" />
+
+        <Button
+            android:id="@+id/btnSaveNotification"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/save_button"
+            android:layout_marginTop="24dp"
+            android:padding="12dp"
+            android:backgroundTint="?android:attr/colorAccent"
+            android:textColor="?attr/colorPrimary"
+            android:textStyle="bold" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="?attr/colorPrimary"
+            android:layout_marginVertical="16dp" />
+
+        <!-- Powrót -->
+        <Button
+            android:id="@+id/btnReturn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/back_button"
+            android:layout_marginTop="24dp"
+            android:padding="12dp"
+            android:backgroundTint="?android:attr/colorAccent"
+            android:textColor="?attr/colorPrimary"
+            android:textStyle="bold" />
+
     </LinearLayout>
-
-    <TextView
-        android:id="@+id/tvNotificationTime"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Aktualny czas powiadomienia:"
-        android:textSize="16sp"
-        android:layout_gravity="center"/>
-
-    <Button
-        android:id="@+id/btnSaveNotification"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Zapisz"
-        android:layout_gravity="center"
-        android:layout_marginTop="20dp">
-
-    </Button>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@android:color/darker_gray"/>
-
-    <Button
-        android:id="@+id/btnReturn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Wróć"
-        android:layout_marginTop="30dp" />
-
-</LinearLayout>
+</ScrollView>

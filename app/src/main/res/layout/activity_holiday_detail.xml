@@ -1,56 +1,66 @@
-<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="16dp"
-    android:gravity="center">
+    android:gravity="center"
+    android:background="?attr/colorPrimary">
 
 
+    <!-- Data święta -->
     <TextView
         android:id="@+id/textViewHolidayDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="16sp"
+        android:layout_marginBottom="8dp"
         android:padding="8dp"
-        android:textColor="?attr/colorPrimary" />
+        android:textSize="16sp"
+        android:textColor="?attr/colorAccent"
+        android:textStyle="italic" />
 
-    <!-- Wyświetlenie nazwy święta -->
+    <!-- Nazwa święta -->
     <TextView
         android:id="@+id/textViewHolidayName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:gravity="center"
         android:textSize="24sp"
         android:textStyle="bold"
-        android:textColor="?attr/colorPrimary" />
+        android:textColor="?android:attr/textColorPrimary" />
 
-    <!-- Wyświetlenie opisu święta -->
+
+    <!-- Opis święta -->
     <TextView
         android:id="@+id/textViewHolidayDescription"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         android:gravity="center"
         android:textSize="18sp"
-        android:layout_marginTop="16dp"/>
+        android:textColor="?android:attr/textColorPrimary" />
 
     <!-- Przycisk dodania do ulubionych -->
     <Button
         android:id="@+id/btnAddToFavorites"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Dodaj do ulubionych"
-        android:layout_marginTop="24dp"
-        android:backgroundTint="?attr/colorPrimary"
-        android:textColor="@android:color/white" />
+        android:layout_marginTop="16dp"
+        android:backgroundTint="?attr/colorAccent"
+        android:paddingHorizontal="16dp"
+        android:paddingVertical="8dp"
+        android:text="@string/add_to_favorites"
+        android:textColor="?android:attr/textColorPrimaryInverse" />
 
     <!-- Przycisk powrotu -->
     <Button
         android:id="@+id/btnBackToCalendar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Powrót"
-        android:layout_marginTop="32dp"
-        android:backgroundTint="?attr/colorPrimary"
-        android:textColor="@android:color/white" />
+        android:layout_marginTop="16dp"
+        android:backgroundTint="?attr/colorAccent"
+        android:paddingHorizontal="16dp"
+        android:paddingVertical="8dp"
+        android:text="@string/back_button"
+        android:textColor="?android:attr/textColorPrimaryInverse" />
 </LinearLayout>

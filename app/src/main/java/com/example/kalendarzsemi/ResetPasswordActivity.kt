@@ -5,6 +5,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.preference.PreferenceManager
 import com.google.firebase.auth.FirebaseAuth
 
 class ResetPasswordActivity : AppCompatActivity() {
@@ -14,6 +15,15 @@ class ResetPasswordActivity : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
+
+        val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
+        val themePreference = sharedPreferences.getString("theme_preference", "light")
+        when (themePreference) {
+            "light" -> setTheme(R.style.Theme_KalendarzSemi_Light)
+            "dark" -> setTheme(R.style.Theme_KalendarzSemi_Dark)
+            "vibrant" -> setTheme(R.style.Theme_KalendarzSemi_Vibrant)
+        }
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_reset_password)
 

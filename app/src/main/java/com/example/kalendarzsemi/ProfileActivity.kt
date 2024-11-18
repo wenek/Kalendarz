@@ -9,6 +9,7 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.preference.PreferenceManager
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 
@@ -20,6 +21,15 @@ class ProfileActivity : AppCompatActivity() {
     private lateinit var emailTextView: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
+
+        val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
+        val themePreference = sharedPreferences.getString("theme_preference", "light")
+        when (themePreference) {
+            "light" -> setTheme(R.style.Theme_KalendarzSemi_Light)
+            "dark" -> setTheme(R.style.Theme_KalendarzSemi_Dark)
+            "vibrant" -> setTheme(R.style.Theme_KalendarzSemi_Vibrant)
+        }
+
         super.onCreate(savedInstanceState)
 
 
