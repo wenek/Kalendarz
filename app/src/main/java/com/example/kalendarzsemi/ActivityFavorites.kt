@@ -5,13 +5,13 @@ import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
+import com.example.kalendarzsemi.databinding.ActivityFavoritesBinding
 
 class FavoritesActivity : AppCompatActivity() {
 
-    private lateinit var recyclerView: RecyclerView
+    private lateinit var binding: ActivityFavoritesBinding
     private lateinit var favoritesAdapter: FavoritesAdapter
     private lateinit var databaseReference: DatabaseReference
     private lateinit var auth: FirebaseAuth
@@ -19,15 +19,18 @@ class FavoritesActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_favorites)
+
+        // Inicjalizacja ViewBinding
+        binding = ActivityFavoritesBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         auth = FirebaseAuth.getInstance()
         databaseReference = FirebaseDatabase.getInstance().reference
 
-        recyclerView = findViewById(R.id.recyclerViewFavorites)
-        recyclerView.layoutManager = LinearLayoutManager(this)
+        // Konfiguracja RecyclerView
+        binding.recyclerViewFavorites.layoutManager = LinearLayoutManager(this)
         favoritesAdapter = FavoritesAdapter(favoriteHolidays)
-        recyclerView.adapter = favoritesAdapter
+        binding.recyclerViewFavorites.adapter = favoritesAdapter
 
         loadFavoriteHolidays()
     }

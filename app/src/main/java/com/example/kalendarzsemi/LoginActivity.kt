@@ -4,23 +4,20 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.method.HideReturnsTransformationMethod
 import android.text.method.PasswordTransformationMethod
-import android.widget.Button
-import android.widget.EditText
-import android.widget.ImageView
-import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.preference.PreferenceManager
 import com.google.firebase.auth.FirebaseAuth
+import com.example.kalendarzsemi.databinding.ActivityLoginBinding
 
 class LoginActivity : AppCompatActivity() {
 
     private lateinit var auth: FirebaseAuth
-    private var isPasswordVisible = false // Zmienna do przechowywania stanu widoczności hasła
+    private var isPasswordVisible = false // Variable to store password visibility state
+    private lateinit var binding: ActivityLoginBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        // Ustawienie motywu kolorystycznego
-        // Ustawienie motywu na podstawie preferencji użytkownika
+        // Set theme based on user preferences
         val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
         val themePreference = sharedPreferences.getString("theme_preference", "light")
         when (themePreference) {
@@ -30,36 +27,33 @@ class LoginActivity : AppCompatActivity() {
         }
 
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_login)
 
-        // Inicjalizacja Firebase Auth
+        // Initialize ViewBinding
+        binding = ActivityLoginBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        // Initialize Firebase Auth
         auth = FirebaseAuth.getInstance()
 
-        val emailField = findViewById<EditText>(R.id.etEmail)
-        val passwordField = findViewById<EditText>(R.id.etPassword)
-        val showPasswordIcon = findViewById<ImageView>(R.id.showPasswordIcon)
-        val loginButton = findViewById<Button>(R.id.btnSubmit)
-
-
-        // Logika dla przycisku pokazania/ukrycia hasła
-        showPasswordIcon.setOnClickListener {
+        // Set up the show/hide password functionality
+        binding.showPasswordIcon.setOnClickListener {
             if (isPasswordVisible) {
-                // Ukryj hasło
-                passwordField.transformationMethod = PasswordTransformationMethod.getInstance()
-                showPasswordIcon.setImageResource(R.drawable.baseline_visibility_off_24)
+                // Hide password
+                binding.etPassword.transformationMethod = PasswordTransformationMethod.getInstance()
+                binding.showPasswordIcon.setImageResource(R.drawable.baseline_visibility_off_24)
             } else {
-                // Pokaż hasło
-                passwordField.transformationMethod = HideReturnsTransformationMethod.getInstance()
-                showPasswordIcon.setImageResource(R.drawable.baseline_visibility_24)
+                // Show password
+                binding.etPassword.transformationMethod = HideReturnsTransformationMethod.getInstance()
+                binding.showPasswordIcon.setImageResource(R.drawable.baseline_visibility_24)
             }
-            isPasswordVisible = !isPasswordVisible // Przełącz stan widoczności
-            passwordField.setSelection(passwordField.text.length) // Ustawia kursor na końcu tekstu
+            isPasswordVisible = !isPasswordVisible // Toggle password visibility
+            binding.etPassword.setSelection(binding.etPassword.text.length) // Set cursor at the end
         }
 
-        // Obsługa logowania
-        loginButton.setOnClickListener {
-            val email = emailField.text.toString()
-            val password = passwordField.text.toString()
+        // Handle login
+        binding.btnSubmit.setOnClickListener {
+            val email = binding.etEmail.text.toString()
+            val password = binding.etPassword.text.toString()
 
             if (email.isNotEmpty() && password.isNotEmpty()) {
                 loginUser(email, password)
@@ -68,20 +62,18 @@ class LoginActivity : AppCompatActivity() {
             }
         }
 
-        val btnGoToRegister = findViewById<Button>(R.id.btnGoToRegister)
-        btnGoToRegister.setOnClickListener {
+        // Navigate to RegisterActivity
+        binding.btnGoToRegister.setOnClickListener {
             startActivity(Intent(this, RegisterActivity::class.java))
         }
 
-        val forgotPasswordText = findViewById<TextView>(R.id.tvForgotPassword)
-        forgotPasswordText.setOnClickListener {
-            val intent = Intent(this, ResetPasswordActivity::class.java)
-            startActivity(intent)
+        // Navigate to ResetPasswordActivity
+        binding.tvForgotPassword.setOnClickListener {
+            startActivity(Intent(this, ResetPasswordActivity::class.java))
         }
 
-        // Przycisk "Wróć" do MainActivity
-        val btnReturnToMain = findViewById<Button>(R.id.btnReturnToMain)
-        btnReturnToMain.setOnClickListener {
+        // Navigate to MainActivity
+        binding.btnReturnToMain.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
             startActivity(intent)
@@ -97,8 +89,7 @@ class LoginActivity : AppCompatActivity() {
                     startActivity(Intent(this, CalendarActivity::class.java))
                     finish()
                 } else {
-                    Toast.makeText(this, "Logowanie nieudane: ${task.exception?.message}",
-                        Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "Logowanie nieudane: ${task.exception?.message}", Toast.LENGTH_SHORT).show()
                 }
             }
     }

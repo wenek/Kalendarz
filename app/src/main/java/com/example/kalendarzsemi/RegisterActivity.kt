@@ -3,26 +3,27 @@ package com.example.kalendarzsemi
 import android.content.Intent
 import android.os.Bundle
 import android.text.InputType
-import android.util.Log
-import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.preference.PreferenceManager
+import com.example.kalendarzsemi.databinding.ActivityRegisterBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 
 class RegisterActivity : AppCompatActivity() {
 
-    // Zmienne do obsługi Firebase Authentication i Database
+    // Variables for Firebase Authentication and Database
     private lateinit var auth: FirebaseAuth
     private lateinit var database: DatabaseReference
 
-    // Flagi dla pól hasła
+    // Flags for password visibility
     private var isPasswordVisible = false
     private var isConfirmPasswordVisible = false
+
+    private lateinit var binding: ActivityRegisterBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
@@ -34,39 +35,32 @@ class RegisterActivity : AppCompatActivity() {
         }
 
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_register)
 
-        // Inicjalizacja Firebase Auth i Database
+        // Initialize ViewBinding
+        binding = ActivityRegisterBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        // Initialize Firebase Auth and Database
         auth = FirebaseAuth.getInstance()
         database = FirebaseDatabase.getInstance().reference
 
-        val nameField = findViewById<EditText>(R.id.etName)
-        val emailField = findViewById<EditText>(R.id.etEmail)
-        val passwordField = findViewById<EditText>(R.id.etPassword)
-        val passwordConfirmField = findViewById<EditText>(R.id.etConfirmPassword)
-        val passwordToggle = findViewById<ImageView>(R.id.showPasswordIcon)
-        val confirmPasswordToggle = findViewById<ImageView>(R.id.showConfirmPasswordIcon)
-        val registerButton = findViewById<Button>(R.id.btnRegister)
-        val returnToLoginButton = findViewById<Button>(R.id.btnReturnToLogin)
-
-        // Obsługa przycisku przełączania widoczności hasła
-        passwordToggle.setOnClickListener {
+        // Password visibility toggles
+        binding.showPasswordIcon.setOnClickListener {
             isPasswordVisible = !isPasswordVisible
-            togglePasswordVisibility(passwordField, isPasswordVisible, passwordToggle)
+            togglePasswordVisibility(binding.etPassword, isPasswordVisible, binding.showPasswordIcon)
         }
 
-        // Obsługa przycisku przełączania widoczności potwierdzenia hasła
-        confirmPasswordToggle.setOnClickListener {
+        binding.showConfirmPasswordIcon.setOnClickListener {
             isConfirmPasswordVisible = !isConfirmPasswordVisible
-            togglePasswordVisibility(passwordConfirmField, isConfirmPasswordVisible, confirmPasswordToggle)
+            togglePasswordVisibility(binding.etConfirmPassword, isConfirmPasswordVisible, binding.showConfirmPasswordIcon)
         }
 
-        // Obsługa przycisku rejestracji
-        registerButton.setOnClickListener {
-            val name = nameField.text.toString()
-            val email = emailField.text.toString()
-            val password = passwordField.text.toString()
-            val passwordConfirm = passwordConfirmField.text.toString()
+        // Register button click listener
+        binding.btnRegister.setOnClickListener {
+            val name = binding.etName.text.toString()
+            val email = binding.etEmail.text.toString()
+            val password = binding.etPassword.text.toString()
+            val passwordConfirm = binding.etConfirmPassword.text.toString()
 
             if (email.isNotEmpty() && password.isNotEmpty() && passwordConfirm.isNotEmpty()) {
                 if (password != passwordConfirm) {
@@ -79,28 +73,28 @@ class RegisterActivity : AppCompatActivity() {
             }
         }
 
-        // Powrót do ekranu logowania
-        returnToLoginButton.setOnClickListener {
+        // Return to Login screen
+        binding.btnReturnToLogin.setOnClickListener {
             val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
-            finish() // Zamyka ekran rejestracji
+            finish() // Close Register Activity
         }
     }
 
-    // Funkcja do przełączania widoczności hasła
+    // Toggle password visibility
     private fun togglePasswordVisibility(editText: EditText, isVisible: Boolean, toggleIcon: ImageView) {
         if (isVisible) {
             editText.inputType = InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD
-            toggleIcon.setImageResource(R.drawable.baseline_visibility_off_24) // Ikona 'ukryj hasło'
+            toggleIcon.setImageResource(R.drawable.baseline_visibility_off_24) // Hide icon
         } else {
             editText.inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
-            toggleIcon.setImageResource(R.drawable.baseline_visibility_24) // Ikona 'pokaż hasło'
+            toggleIcon.setImageResource(R.drawable.baseline_visibility_24) // Show icon
         }
-        // Ustawienie kursora na końcu tekstu
+        // Move cursor to the end of the text
         editText.setSelection(editText.text.length)
     }
 
-    // Funkcja do rejestracji użytkownika za pomocą Firebase
+    // Register user using Firebase
     private fun registerUser(name: String, email: String, password: String) {
         auth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener(this) { task ->
@@ -111,18 +105,14 @@ class RegisterActivity : AppCompatActivity() {
                     Toast.makeText(this, "Rejestracja udana!", Toast.LENGTH_SHORT).show()
                     val intent = Intent(this, LoginActivity::class.java)
                     startActivity(intent)
-                    finish() // Zamyka ekran rejestracji
+                    finish() // Close Register Activity
                 } else {
-                    Toast.makeText(
-                        this,
-                        "Rejestracja nieudana: ${task.exception?.message}",
-                        Toast.LENGTH_SHORT
-                    ).show()
+                    Toast.makeText(this, "Rejestracja nieudana: ${task.exception?.message}", Toast.LENGTH_SHORT).show()
                 }
             }
     }
 
-    // Funkcja do zapisywania użytkownika w Firebase Realtime Database
+    // Save user data to Firebase Realtime Database
     private fun saveUserToDatabase(userId: String, name: String, email: String) {
         val user = User(name, email)
         database.child("users").child(userId).setValue(user)
@@ -131,10 +121,9 @@ class RegisterActivity : AppCompatActivity() {
             }
             .addOnFailureListener {
                 Toast.makeText(this, "Błąd zapisu danych: ${it.message}", Toast.LENGTH_SHORT).show()
-                Log.e("RegisterActivity", "Database Error: ${it.message}")
             }
     }
 }
 
-// Klasa reprezentująca dane użytkownika
+// Data class for User
 data class User(val name: String, val email: String)

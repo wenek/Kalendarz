@@ -4,19 +4,18 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.Button
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
 import androidx.preference.PreferenceManager
 import com.google.firebase.auth.FirebaseAuth
+import com.example.kalendarzsemi.databinding.ActivityAboutBinding
 
 class AboutActivity : AppCompatActivity() {
 
     private lateinit var auth: FirebaseAuth
+    private lateinit var binding: ActivityAboutBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
-
+        // Ustawienie tematu
         val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
         val themePreference = sharedPreferences.getString("theme_preference", "light")
         when (themePreference) {
@@ -26,22 +25,21 @@ class AboutActivity : AppCompatActivity() {
         }
 
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_about)
 
-        // Znajdź widoki
-        val appDescription = findViewById<TextView>(R.id.app_description)
-        appDescription.text = getString(R.string.app_description_content)
+        // Inicjalizacja bindingu
+        binding = ActivityAboutBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        // Ustawienie opisu aplikacji
+        binding.appDescription.text = getString(R.string.app_description_content)
 
         // Konfiguracja Toolbar
-        val toolbar = findViewById<Toolbar>(R.id.toolbar)
-        setSupportActionBar(toolbar)
+        setSupportActionBar(binding.toolbar)
 
         // Obsługa przycisku powrotu
-        val btnReturn = findViewById<Button>(R.id.btnReturn)
-        btnReturn.setOnClickListener {
+        binding.btnReturn.setOnClickListener {
             finish() // Zamyka AboutActivity i wraca do poprzedniego widoku
         }
-
     }
 
     // Nadmuchanie menu z pliku XML

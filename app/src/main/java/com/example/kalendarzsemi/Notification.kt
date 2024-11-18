@@ -13,14 +13,14 @@ const val titleExtra = "titleExtra"
 const val messageExtra = "messageExtra"
 
 class Notification : BroadcastReceiver() {
-    private val TAG = "Notification"
+    private val tag = "Notification"
 
     override fun onReceive(context: Context?, intent: Intent?) {
-        Log.d(TAG, "onReceive: Notification received")
+        Log.d(tag, "onReceive: Notification received")
 
         val title = intent?.getStringExtra(titleExtra)
         val message = intent?.getStringExtra(messageExtra)
-        Log.d(TAG, "onReceive: Notification Title = $title, Message = $message")
+        Log.d(tag, "onReceive: Notification Title = $title, Message = $message")
 
         // Tworzenie Intent do otwarcia kalendarza
         val calendarIntent = Intent(context, CalendarActivity::class.java).apply {
@@ -44,7 +44,7 @@ class Notification : BroadcastReceiver() {
                 .setAutoCancel(true)
                 .build()
         }
-        Log.d(TAG, "onReceive: Building and showing notification")
+        Log.d(tag, "onReceive: Building and showing notification")
 
         val manager = context?.getSystemService(Context.NOTIFICATION_SERVICE) as android.app.NotificationManager
         manager.notify(notificationID, notification)

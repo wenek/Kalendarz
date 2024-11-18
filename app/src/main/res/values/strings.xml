@@ -45,5 +45,7 @@
     <string name="notifications_settings">Ustawienia powiadomień</string>
     <string name="notification_time">Ustawiony czas powiadomień</string>
     <string name="save_button">Zapisz</string>
-    <string name="search_date">Wyszukaj po dacie</string>"
+    <string name="search_date">Wyszukaj po dacie</string>
+    <string name="cancel_button">Wyczyść powiadomienia</string>"
+    <string name="notification_time_info">Notification Time: %s</string>
 </resources>

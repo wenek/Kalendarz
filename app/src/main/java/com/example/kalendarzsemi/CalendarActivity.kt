@@ -112,7 +112,7 @@ class CalendarActivity : AppCompatActivity() {
         val calendar = Calendar.getInstance()
         val datePickerDialog = DatePickerDialog(
             this,
-            DatePickerDialog.OnDateSetListener { _, year, month, dayOfMonth ->
+            { _, year, month, dayOfMonth ->
                 // Zaktualizuj kalendarz po wybraniu daty
                 val selectedDate = Calendar.getInstance()
                 selectedDate.set(year, month, dayOfMonth)

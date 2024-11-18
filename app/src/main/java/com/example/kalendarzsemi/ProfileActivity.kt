@@ -5,23 +5,22 @@ import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.Button
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
 import androidx.preference.PreferenceManager
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.*
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
+import com.example.kalendarzsemi.databinding.ActivityProfileBinding
 
 class ProfileActivity : AppCompatActivity() {
 
     private lateinit var databaseReference: DatabaseReference
     private lateinit var auth: FirebaseAuth
-    private lateinit var nameTextView: TextView
-    private lateinit var emailTextView: TextView
+    private lateinit var binding: ActivityProfileBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
+        // Set the theme based on user preferences
         val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
         val themePreference = sharedPreferences.getString("theme_preference", "light")
         when (themePreference) {
@@ -32,40 +31,34 @@ class ProfileActivity : AppCompatActivity() {
 
         super.onCreate(savedInstanceState)
 
+        // Initialize ViewBinding
+        binding = ActivityProfileBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        setContentView(R.layout.activity_profile)
-
-        // Konfiguracja Firebase
+        // Initialize Firebase
         auth = FirebaseAuth.getInstance()
         databaseReference = FirebaseDatabase.getInstance().reference
 
-        // Konfiguracja Toolbar
-        val toolbar = findViewById<Toolbar>(R.id.toolbar)
-        setSupportActionBar(toolbar)
+        // Set up the Toolbar
+        setSupportActionBar(binding.toolbar)
 
-        // Znalezienie widoków
-        nameTextView = findViewById(R.id.profileName)
-        emailTextView = findViewById(R.id.profileEmail)
-
-        // Załaduj dane użytkownika
+        // Load user profile data
         loadUserProfile()
 
-        val btnShowFavorites = findViewById<Button>(R.id.showFavoritesButton)
-        btnShowFavorites.setOnClickListener {
+        // Button to navigate to Favorites Activity
+        binding.showFavoritesButton.setOnClickListener {
             val intent = Intent(this, FavoritesActivity::class.java)
             startActivity(intent)
         }
-
     }
 
-
-    // Nadmuchanie menu z pliku XML
+    // Inflate the menu from XML
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.main_menu, menu)
         return true
     }
 
-    // Obsługa kliknięć w elementy menu
+    // Handle menu item clicks
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.home -> {
@@ -99,6 +92,7 @@ class ProfileActivity : AppCompatActivity() {
         }
     }
 
+    // Load user profile data from Firebase
     private fun loadUserProfile() {
         val currentUser = auth.currentUser
         if (currentUser != null) {
@@ -112,17 +106,16 @@ class ProfileActivity : AppCompatActivity() {
                     val email = snapshot.child("email").value.toString()
                     val name = snapshot.child("name").value.toString()
                     Log.e("UserProfile", "Name: $name, Email: $email")
-                    nameTextView.text = name
-                    emailTextView.text = email
+                    binding.profileName.text = name
+                    binding.profileEmail.text = email
                 } else {
-                    Log.e("UserProfile", "Dane użytkownika nie istnieją")
+                    Log.e("UserProfile", "User data does not exist")
                 }
             }.addOnFailureListener { exception ->
-                Log.e("UserProfile", "Błąd odczytu danych: ${exception.message}")
+                Log.e("UserProfile", "Error reading data: ${exception.message}")
             }
         } else {
-            Log.e("UserProfile", "Użytkownik nie jest zalogowany")
+            Log.e("UserProfile", "User is not logged in")
         }
     }
-
 }
