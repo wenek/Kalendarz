@@ -50,6 +50,7 @@ class ProfileActivity : AppCompatActivity() {
             val intent = Intent(this, FavoritesActivity::class.java)
             startActivity(intent)
         }
+
     }
 
     // Inflate the menu from XML

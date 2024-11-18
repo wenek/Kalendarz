@@ -48,4 +48,8 @@
     <string name="search_date">Wyszukaj po dacie</string>
     <string name="cancel_button">Wyczyść powiadomienia</string>"
     <string name="notification_time_info">Notification Time: %s</string>
+    <string name="sort_by_date">Sortuj po dacie</string>
+    <string name="sort_alphabetically">Sortuj a-Z</string>
+    <string name="sort_by_addition">Po dodaniu</string>
+    <string name="sort_title">Sortowanie</string>
 </resources>
