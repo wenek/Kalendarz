@@ -2,9 +2,12 @@ package com.example.kalendarzsemi
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.InputType
 import android.util.Log
-import android.view.Menu
-import android.view.MenuItem
+import android.view.View
+import android.widget.EditText
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.preference.PreferenceManager
 import com.google.firebase.auth.FirebaseAuth
@@ -20,7 +23,6 @@ class ProfileActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
-        // Set the theme based on user preferences
         val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
         val themePreference = sharedPreferences.getString("theme_preference", "light")
         when (themePreference) {
@@ -39,84 +41,81 @@ class ProfileActivity : AppCompatActivity() {
         auth = FirebaseAuth.getInstance()
         databaseReference = FirebaseDatabase.getInstance().reference
 
-        // Set up the Toolbar
-        setSupportActionBar(binding.toolbar)
-
         // Load user profile data
         loadUserProfile()
 
-        // Button to navigate to Favorites Activity
+        // Handle Favorites Button
         binding.showFavoritesButton.setOnClickListener {
-            val intent = Intent(this, FavoritesActivity::class.java)
-            startActivity(intent)
+            startActivity(Intent(this, FavoritesActivity::class.java))
         }
 
-    }
+        binding.profileImage.setOnClickListener {
+            startActivity(Intent(this, ProfileActivity::class.java))
+        }
 
-    // Inflate the menu from XML
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.main_menu, menu)
-        return true
-    }
+        binding.editBioButton.setOnClickListener {
+            val currentBio = binding.profileBio.text.toString()
 
-    // Handle menu item clicks
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
-            R.id.home -> {
-                startActivity(Intent(this, ProfileActivity::class.java))
-                finish()
-                true
-            }
-            R.id.calendar -> {
-                startActivity(Intent(this, CalendarActivity::class.java))
-                finish()
-                true
-            }
-            R.id.settings -> {
-                startActivity(Intent(this, SettingsActivity::class.java))
-                finish()
-                true
-            }
-            R.id.about -> {
-                val intent = Intent(this, AboutActivity::class.java)
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
-                startActivity(intent)
-                true
-            }
-            R.id.logout -> {
-                auth.signOut()
-                startActivity(Intent(this, LoginActivity::class.java))
-                finish()
-                true
-            }
-            else -> super.onOptionsItemSelected(item)
+            // Tworzenie EditText w oknie dialogowym
+            val editText = EditText(this)
+            editText.setText(currentBio)
+            editText.inputType = InputType.TYPE_CLASS_TEXT
+
+            // Okno dialogowe z EditText
+            AlertDialog.Builder(this)
+                .setTitle("Edytuj opis")
+                .setView(editText)
+                .setPositiveButton("Zapisz") { _, _ ->
+                    val newBio = editText.text.toString()
+                    saveBioToDatabase(newBio)
+                }
+                .setNegativeButton("Anuluj", null)
+                .show()
         }
     }
 
-    // Load user profile data from Firebase
+    private fun saveBioToDatabase(bio: String) {
+        val userUid = auth.currentUser?.uid ?: return
+        databaseReference.child("users").child(userUid).child("bio").setValue(bio)
+            .addOnSuccessListener {
+                Toast.makeText(this, "Bio updated successfully!", Toast.LENGTH_SHORT).show()
+
+                // Odśwież widok z nowym opisem
+                loadUserProfile()  // Ładujemy dane użytkownika, w tym zaktualizowany opis
+
+                // Po zapisaniu, ukrywamy EditText i pokazujemy TextView z nowym bio
+                binding.profileBio.visibility = View.VISIBLE  // Pokazujemy TextView
+
+                // Zmieniamy przycisk na "Edytuj"
+                binding.editBioButton.text = getString(R.string.edit_bio)
+            }
+            .addOnFailureListener { exception ->
+                Toast.makeText(this, "Failed to update bio: ${exception.message}", Toast.LENGTH_SHORT).show()
+            }
+    }
+
     private fun loadUserProfile() {
         val currentUser = auth.currentUser
         if (currentUser != null) {
             val userUid = currentUser.uid
             val userRef = databaseReference.child("users").child(userUid)
 
-            Log.e("UserProfile", "User UID: $userUid")
-
             userRef.get().addOnSuccessListener { snapshot ->
                 if (snapshot.exists()) {
                     val email = snapshot.child("email").value.toString()
                     val name = snapshot.child("name").value.toString()
-                    Log.e("UserProfile", "Name: $name, Email: $email")
+                    val bio = snapshot.child("bio").value.toString()
+
                     binding.profileName.text = name
                     binding.profileEmail.text = email
-                } else {
-                    Log.e("UserProfile", "User data does not exist")
+                    binding.profileBio.text = bio // Ustaw tekst w TextView
+
+                    binding.profileBio.visibility = View.VISIBLE // Pokazujemy TextView
                 }
             }.addOnFailureListener { exception ->
                 Log.e("UserProfile", "Error reading data: ${exception.message}")
             }
-        } else {
-            Log.e("UserProfile", "User is not logged in")
         }
     }
+
 }

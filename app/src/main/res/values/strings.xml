@@ -52,4 +52,11 @@
     <string name="sort_alphabetically">Sortuj a-Z</string>
     <string name="sort_by_addition">Po dodaniu</string>
     <string name="sort_title">Sortowanie</string>
+    <string name="edit_bio_hint">Możesz tutaj wpisać swój własny opis</string>
+    <string name="upload_avatar">Zmień avatar</string>
+    <string name="not_logged_in">Nie jesteś zalogowany</string>
+    <string name="login">Zaloguj</string>
+    <string name="profile_bio_hint">Dodaj swój własny opis</string>
+    <string name="edit_bio">Edytuj opis</string>
+    <string name="save_bio">Zapisz opis</string>
 </resources>

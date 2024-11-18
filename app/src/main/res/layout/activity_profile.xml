@@ -53,24 +53,40 @@
         android:textColor="?android:attr/colorAccent"
         android:textSize="16sp" />
 
+    <!-- TextView do wyświetlania bio -->
     <TextView
         android:id="@+id/profileBio"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/profileEmail"
         android:layout_marginTop="16dp"
+        android:autofillHints="@string/profile_bio"
         android:padding="16dp"
+        android:maxWidth="480dp"
         android:gravity="center_horizontal"
-        android:text="@string/profile_bio"
+        android:hint="@string/profile_bio_hint"
         android:textColor="?android:attr/colorAccent"
         android:textSize="16sp" />
+
+    <!-- Przycisk do edycji bio -->
+    <Button
+        android:id="@+id/editBioButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/profileBio"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"
+        android:text="@string/edit_bio"
+        android:textColor="?attr/colorPrimary"
+        android:backgroundTint="?android:attr/colorAccent"
+        android:textStyle="bold" />
 
     <!-- Przycisk: Pokaż ulubione -->
     <Button
         android:id="@+id/showFavoritesButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/profileBio"
+        android:layout_below="@id/editBioButton"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="24dp"
         android:padding="12dp"
@@ -79,31 +95,15 @@
         android:textColor="?attr/colorPrimary"
         android:textStyle="bold" />
 
-    <!-- Przycisk edycji profilu -->
-    <Button
-        android:id="@+id/editProfileButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/showFavoritesButton"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="16dp"
-        android:padding="12dp"
-        android:backgroundTint="?android:attr/colorAccent"
-        android:text="@string/edit_profile"
-        android:textColor="?attr/colorPrimary"
-        android:textStyle="bold" />
-
     <!-- Przycisk wylogowania -->
     <Button
         android:id="@+id/logoutButton"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_margin="16dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="24dp"
         android:padding="12dp"
-        android:gravity="center"
-        android:layout_gravity="center"
-        android:maxWidth="300dp"
         android:backgroundTint="@color/red_primary"
         android:text="@string/logout"
         android:textColor="@android:color/white"
