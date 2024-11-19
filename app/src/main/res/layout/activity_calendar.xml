@@ -29,11 +29,46 @@
         android:textStyle="bold"
         android:textColor="?android:attr/textColorPrimary" />
 
+    <TextView
+        android:id="@+id/tvDaysUntilHoliday"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvDate"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="8dp"
+        android:padding="8dp"
+        android:text="@string/days_until_placeholder"
+        android:textSize="18sp"
+        android:textStyle="italic"
+        android:textColor="?android:attr/textColorSecondary" />
+
+
+    <!-- Kontener na listę świąt -->
+    <ScrollView
+        android:id="@+id/holidaysScrollContainer"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_below="@id/tvDaysUntilHoliday"
+        android:layout_above="@id/btnSearchDate"
+        android:contentDescription="@string/holidays_list"
+        android:layout_marginTop="16dp"
+        android:layout_centerHorizontal="true"
+        android:gravity="center">
+
+        <LinearLayout
+            android:id="@+id/holidaysContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="8dp"
+            android:gravity="center" />
+    </ScrollView>
+
     <Button
         android:id="@+id/btnSearchDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/tvDate"
+        android:layout_above="@id/btnSearchByName"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="16dp"
         android:padding="8dp"
@@ -44,25 +79,20 @@
         android:textColor="?android:attr/colorPrimary"
         android:layout_gravity="center"/>
 
-
-    <!-- Kontener na listę świąt -->
-    <ScrollView
-        android:id="@+id/holidaysScrollContainer"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_below="@id/btnSearchDate"
+    <Button
+        android:id="@+id/btnSearchByName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_above="@id/navigationButtonsContainer"
-        android:contentDescription="@string/holidays_list"
-        android:layout_marginTop="16dp">
-
-        <LinearLayout
-            android:id="@+id/holidaysContainer"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:gravity="center"
-            android:padding="8dp" />
-    </ScrollView>
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"
+        android:padding="8dp"
+        android:text="@string/search_name"
+        android:backgroundTint="?attr/colorAccent"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:textColor="?android:attr/colorPrimary"
+        android:layout_gravity="center"/>
 
     <!-- Kontener nawigacji -->
     <LinearLayout

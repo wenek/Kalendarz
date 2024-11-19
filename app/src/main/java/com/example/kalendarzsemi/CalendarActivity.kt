@@ -5,7 +5,9 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.EditText
 import android.widget.TextView
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.preference.PreferenceManager
 import com.google.firebase.auth.FirebaseAuth
@@ -54,6 +56,10 @@ class CalendarActivity : AppCompatActivity() {
 
         binding.btnSearchDate.setOnClickListener {
             openDatePicker()
+        }
+
+        binding.btnSearchByName.setOnClickListener {
+            showSearchByNameDialog()
         }
     }
 
@@ -138,10 +144,10 @@ class CalendarActivity : AppCompatActivity() {
         val formattedDate = dateFormat.format(currentDate.time)
 
         // Update date view
-        binding.tvDate.text = formattedDate // Zamiast findViewById
+        binding.tvDate.text = formattedDate
 
         // Clear previous holiday views
-        binding.holidaysContainer.removeAllViews() // Zamiast findViewById
+        binding.holidaysContainer.removeAllViews()
 
         // Load holidays for the selected date
         val holidays = loadHolidaysForDate(formattedDate)
@@ -151,15 +157,118 @@ class CalendarActivity : AppCompatActivity() {
                 textSize = 18f
                 setPadding(0, 8, 0, 8)
                 setOnClickListener {
-                    // Pass holiday details and date to HolidayDetailActivity
                     val intent = Intent(this@CalendarActivity, HolidayDetailActivity::class.java)
-                    intent.putExtra("holiday_name", holiday.first)       // Pass the name
-                    intent.putExtra("holiday_description", holiday.second) // Pass the description
-                    intent.putExtra("holiday_date", holiday.third)         // Pass the date
+                    intent.putExtra("holiday_name", holiday.first)
+                    intent.putExtra("holiday_description", holiday.second)
+                    intent.putExtra("holiday_date", holiday.third)
                     startActivity(intent)
                 }
             }
             binding.holidaysContainer.addView(holidayTextView)
+        }
+
+        // Calculate days until the first holiday if it exists
+        if (holidays.isNotEmpty()) {
+            calculateDaysUntilHoliday(holidays[0].third) // third is the holiday date
+        } else {
+            binding.tvDaysUntilHoliday.text = getString(R.string.no_upcoming_holidays)
+        }
+    }
+
+    private fun calculateDaysUntilHoliday(holidayDateString: String) {
+        try {
+            val dateFormat = SimpleDateFormat("dd.MM.yyyy", Locale.getDefault())
+
+            // Parsowanie daty święta
+            val holidayDate = dateFormat.parse(holidayDateString)
+            if (holidayDate == null) {
+                binding.tvDaysUntilHoliday.text = getString(R.string.error_calculating_days)
+                return
+            }
+
+            // Obecna data (bez godzin, minut, sekund)
+            val today = Calendar.getInstance().apply {
+                set(Calendar.HOUR_OF_DAY, 0)
+                set(Calendar.MINUTE, 0)
+                set(Calendar.SECOND, 0)
+                set(Calendar.MILLISECOND, 0)
+            }
+
+            // Data święta (bez godzin, minut, sekund)
+            val holidayCalendar = Calendar.getInstance().apply {
+                time = holidayDate
+                set(Calendar.HOUR_OF_DAY, 0)
+                set(Calendar.MINUTE, 0)
+                set(Calendar.SECOND, 0)
+                set(Calendar.MILLISECOND, 0)
+            }
+
+            // Różnica w dniach, dzielona przez liczbę milisekund w jednej dobie
+            val daysDifference = ((holidayCalendar.timeInMillis - today.timeInMillis) / (1000 * 60 * 60 * 24)).toInt()
+
+            // Wyświetlanie wyniku
+            if (daysDifference >= 0) {
+                binding.tvDaysUntilHoliday.text = getString(R.string.days_until_holiday, daysDifference)
+            } else {
+                binding.tvDaysUntilHoliday.text = getString(R.string.holiday_passed)
+            }
+        } catch (e: Exception) {
+            binding.tvDaysUntilHoliday.text = getString(R.string.error_calculating_days)
+        }
+    }
+
+    private fun showSearchByNameDialog() {
+        val input = EditText(this)
+        input.hint = getString(R.string.enter_holiday_name)
+
+        AlertDialog.Builder(this)
+            .setTitle(getString(R.string.search_holiday))
+            .setView(input)
+            .setPositiveButton(getString(R.string.search)) { _, _ ->
+                val holidayName = input.text.toString().trim()
+                searchHolidayByName(holidayName)
+            }
+            .setNegativeButton(getString(R.string.cancel), null)
+            .show()
+    }
+
+    private fun searchHolidayByName(name: String) {
+        val jsonString = loadJsonFromRaw(R.raw.holidays)
+        val jsonObject = JSONObject(jsonString)
+
+        var holidayFound: Triple<String, String, String>? = null
+        jsonObject.keys().forEach { date ->
+            val holidaysForDay = jsonObject.optJSONArray(date)
+            holidaysForDay?.let {
+                for (i in 0 until it.length()) {
+                    val holiday = it.getJSONObject(i)
+                    if (holiday.getString("name").equals(name, ignoreCase = true)) {
+                        holidayFound = Triple(
+                            holiday.getString("name"),
+                            holiday.getString("description"),
+                            date
+                        )
+                        break
+                    }
+                }
+            }
+            if (holidayFound != null) return@forEach
+        }
+
+        if (holidayFound != null) {
+            // Jeśli znaleziono, przejście do HolidayDetailActivity
+            val intent = Intent(this, HolidayDetailActivity::class.java)
+            intent.putExtra("holiday_name", holidayFound!!.first)
+            intent.putExtra("holiday_description", holidayFound!!.second)
+            intent.putExtra("holiday_date", holidayFound!!.third)
+            startActivity(intent)
+        } else {
+            // Jeśli nie znaleziono, wyświetlenie komunikatu
+            AlertDialog.Builder(this)
+                .setTitle(getString(R.string.holiday_not_found))
+                .setMessage(getString(R.string.no_holiday_named, name))
+                .setPositiveButton(getString(R.string.ok), null)
+                .show()
         }
     }
 
