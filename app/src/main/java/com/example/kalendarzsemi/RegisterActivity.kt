@@ -12,14 +12,14 @@ import com.example.kalendarzsemi.databinding.ActivityRegisterBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
+import java.text.SimpleDateFormat
+import java.util.*
 
 class RegisterActivity : AppCompatActivity() {
 
-    // Variables for Firebase Authentication and Database
     private lateinit var auth: FirebaseAuth
     private lateinit var database: DatabaseReference
 
-    // Flags for password visibility
     private var isPasswordVisible = false
     private var isConfirmPasswordVisible = false
 
@@ -114,7 +114,13 @@ class RegisterActivity : AppCompatActivity() {
 
     // Save user data to Firebase Realtime Database
     private fun saveUserToDatabase(userId: String, name: String, email: String) {
-        val user = User(name, email)
+        // Pobranie aktualnej daty utworzenia konta
+        val creationDate = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(Date())
+
+        // Dane użytkownika
+        val user = User(name, email, creationDate)
+
+        // Zapis do Firebase
         database.child("users").child(userId).setValue(user)
             .addOnSuccessListener {
                 Toast.makeText(this, "Użytkownik zapisany w bazie danych", Toast.LENGTH_SHORT).show()
@@ -126,4 +132,8 @@ class RegisterActivity : AppCompatActivity() {
 }
 
 // Data class for User
-data class User(val name: String, val email: String)
+data class User(
+    val name: String,
+    val email: String,
+    val accountCreationDate: String
+)

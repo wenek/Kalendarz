@@ -6,7 +6,8 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class FavoritesAdapter(private val favoriteHolidays: List<Holiday>) : RecyclerView.Adapter<FavoritesAdapter.ViewHolder>() {
+class FavoritesAdapter
+    (private val favoriteHolidays: List<Holiday>) : RecyclerView.Adapter<FavoritesAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_favorite, parent, false)

@@ -53,12 +53,37 @@
         android:textColor="?android:attr/colorAccent"
         android:textSize="16sp" />
 
+    <!-- TextView do wyświetlania liczby polubionych świąt -->
+    <TextView
+        android:id="@+id/profileStatsHolidaysCount"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/profileEmail"
+        android:layout_marginTop="0dp"
+        android:padding="16dp"
+        android:gravity="center_horizontal"
+        android:text="@string/profile_info_placeholder"
+        android:textColor="?android:attr/colorAccent"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/profileStatsAccountCreate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/profileStatsHolidaysCount"
+        android:layout_marginTop="0dp"
+        android:padding="16dp"
+        android:gravity="center_horizontal"
+        android:text="@string/profile_info_placeholder"
+        android:textColor="?android:attr/colorAccent"
+        android:textSize="16sp" />
+
     <!-- TextView do wyświetlania bio -->
     <TextView
         android:id="@+id/profileBio"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/profileEmail"
+        android:layout_below="@id/profileStatsAccountCreate"
         android:layout_marginTop="16dp"
         android:autofillHints="@string/profile_bio"
         android:padding="16dp"

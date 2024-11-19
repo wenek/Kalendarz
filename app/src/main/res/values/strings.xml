@@ -60,7 +60,7 @@
     <string name="edit_bio">Edytuj opis</string>
     <string name="save_bio">Zapisz opis</string>
     <string name="days_until_placeholder">Dni do święta</string>
-    <string name="days_until_holiday">Do najbliższego święta zostało %1$d dni!</string>
+    <string name="days_until_holiday">Do święta zostało %1$d dni!</string>
     <string name="holiday_passed">Święto już minęło.</string>
     <string name="no_upcoming_holidays">Brak nadchodzących świąt dla wybranej daty.</string>
     <string name="error_calculating_days">Błąd podczas obliczania dni do święta.</string>
@@ -74,6 +74,9 @@
     <string name="cancel">Cancel</string>
     <string name="ok">OK</string>
     <string name="set_reminder">Ustaw przypomnienie</string>
+    <string name="profile_info_placeholder">Informacje o koncie</string>
+    <string name="profile_stats">Liczba polubionych świąt: %d</string>
+    <string name="profile_creation_date">Konto stworzone: %s</string>
 
 
 </resources>

@@ -140,7 +140,7 @@ class CalendarActivity : AppCompatActivity() {
     }
 
     private fun updateCalendar() {
-        val dateFormat = SimpleDateFormat("dd.MM.yyyy", Locale.getDefault())
+        val dateFormat = SimpleDateFormat("dd.MM", Locale.getDefault()) // Zmiana formatu na "dd.MM"
         val formattedDate = dateFormat.format(currentDate.time)
 
         // Update date view
@@ -149,7 +149,7 @@ class CalendarActivity : AppCompatActivity() {
         // Clear previous holiday views
         binding.holidaysContainer.removeAllViews()
 
-        // Load holidays for the selected date
+        // Load holidays for the selected date (now without year)
         val holidays = loadHolidaysForDate(formattedDate)
         holidays.forEach { holiday ->
             val holidayTextView = TextView(this).apply {
@@ -177,10 +177,12 @@ class CalendarActivity : AppCompatActivity() {
 
     private fun calculateDaysUntilHoliday(holidayDateString: String) {
         try {
-            val dateFormat = SimpleDateFormat("dd.MM.yyyy", Locale.getDefault())
+            // Dodanie aktualnego roku do daty święta
+            val currentYear = Calendar.getInstance().get(Calendar.YEAR)
+            val fullHolidayDateString = "$holidayDateString.$currentYear"
 
-            // Parsowanie daty święta
-            val holidayDate = dateFormat.parse(holidayDateString)
+            val dateFormat = SimpleDateFormat("dd.MM.yyyy", Locale.getDefault()) // Zmiana formatu na "dd.MM.yyyy"
+            val holidayDate = dateFormat.parse(fullHolidayDateString)
             if (holidayDate == null) {
                 binding.tvDaysUntilHoliday.text = getString(R.string.error_calculating_days)
                 return
@@ -216,6 +218,7 @@ class CalendarActivity : AppCompatActivity() {
             binding.tvDaysUntilHoliday.text = getString(R.string.error_calculating_days)
         }
     }
+
 
     private fun showSearchByNameDialog() {
         val input = EditText(this)
@@ -279,7 +282,7 @@ class CalendarActivity : AppCompatActivity() {
         val jsonString = loadJsonFromRaw(R.raw.holidays)
         val jsonObject = JSONObject(jsonString)
 
-        // Retrieve holidays for the given date
+        // Retrieve holidays for the given date (now using only "dd.MM")
         val holidaysForDay = jsonObject.optJSONArray(date)
         holidaysForDay?.let {
             for (i in 0 until it.length()) {
@@ -289,6 +292,7 @@ class CalendarActivity : AppCompatActivity() {
         }
         return holidaysList
     }
+
 
     // Funkcja do ładowania pliku JSON z zasobów raw
     private fun loadJsonFromRaw(resourceId: Int): String {

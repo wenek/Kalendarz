@@ -53,6 +53,15 @@ class ProfileActivity : AppCompatActivity() {
             startActivity(Intent(this, ProfileActivity::class.java))
         }
 
+        binding.logoutButton.setOnClickListener {
+            val auth = FirebaseAuth.getInstance()
+            auth.signOut()
+
+            val intent = Intent(this, LoginActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
+
         binding.editBioButton.setOnClickListener {
             val currentBio = binding.profileBio.text.toString()
 
@@ -72,6 +81,7 @@ class ProfileActivity : AppCompatActivity() {
                 .setNegativeButton("Anuluj", null)
                 .show()
         }
+
     }
 
     private fun saveBioToDatabase(bio: String) {
@@ -102,20 +112,31 @@ class ProfileActivity : AppCompatActivity() {
 
             userRef.get().addOnSuccessListener { snapshot ->
                 if (snapshot.exists()) {
+                    // Podstawowe dane użytkownika
                     val email = snapshot.child("email").value.toString()
                     val name = snapshot.child("name").value.toString()
                     val bio = snapshot.child("bio").value.toString()
 
                     binding.profileName.text = name
                     binding.profileEmail.text = email
-                    binding.profileBio.text = bio // Ustaw tekst w TextView
+                    binding.profileBio.text = bio
 
-                    binding.profileBio.visibility = View.VISIBLE // Pokazujemy TextView
+                    binding.profileBio.visibility = View.VISIBLE
+
+                    // Liczba ulubionych świąt
+                    val favoritesRef = snapshot.child("favorites")
+                    val favoritesCount = favoritesRef.childrenCount
+                    binding.profileStatsAccountCreate.text = getString(R.string.profile_stats, favoritesCount)
+
+                    // Data utworzenia konta
+                    val accountCreationDate = snapshot.child("accountCreationDate").value.toString()
+                    binding.profileStatsHolidaysCount.text = getString(R.string.profile_creation_date, accountCreationDate)
                 }
             }.addOnFailureListener { exception ->
                 Log.e("UserProfile", "Error reading data: ${exception.message}")
             }
         }
     }
+
 
 }
