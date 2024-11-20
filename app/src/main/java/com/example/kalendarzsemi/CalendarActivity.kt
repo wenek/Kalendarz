@@ -154,8 +154,8 @@ class CalendarActivity : AppCompatActivity() {
         holidays.forEach { holiday ->
             val holidayTextView = TextView(this).apply {
                 text = holiday.first // Holiday name
-                textSize = 18f
-                setPadding(0, 8, 0, 8)
+                textSize = 20f
+                setPadding(0, 16, 0, 16)
                 setOnClickListener {
                     val intent = Intent(this@CalendarActivity, HolidayDetailActivity::class.java)
                     intent.putExtra("holiday_name", holiday.first)

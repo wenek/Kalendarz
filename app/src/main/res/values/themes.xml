@@ -25,4 +25,5 @@
         <item name="android:textColorPrimary">@color/primary_text_color_vibrant</item>
         <item name="android:textColorSecondary">@color/secondary_text_color_vibrant</item>
     </style>
+
 </resources>

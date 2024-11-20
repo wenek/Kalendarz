@@ -77,6 +77,8 @@
     <string name="profile_info_placeholder">Informacje o koncie</string>
     <string name="profile_stats">Liczba polubionych świąt: %d</string>
     <string name="profile_creation_date">Konto stworzone: %s</string>
+    <string name="link1_text">Jeśli szukasz więcej informacji odwiedź stronę kalbi.pl</string>
+    <string name="link2_text">Podoba ci się aplikacja? Wesprzyj szczytny cel</string>
 
 
 </resources>

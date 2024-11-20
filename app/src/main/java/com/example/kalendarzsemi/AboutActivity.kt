@@ -1,6 +1,7 @@
 package com.example.kalendarzsemi
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -11,7 +12,6 @@ import com.example.kalendarzsemi.databinding.ActivityAboutBinding
 
 class AboutActivity : AppCompatActivity() {
 
-    private lateinit var auth: FirebaseAuth
     private lateinit var binding: ActivityAboutBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -40,6 +40,17 @@ class AboutActivity : AppCompatActivity() {
         binding.btnReturn.setOnClickListener {
             finish() // Zamyka AboutActivity i wraca do poprzedniego widoku
         }
+
+        // Obsługa kliknięć linków
+        binding.link1.setOnClickListener {
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://www.kalbi.pl/"))
+            startActivity(intent)
+        }
+
+        binding.link2.setOnClickListener {
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://dioz.pl/pomoz/"))
+            startActivity(intent)
+        }
     }
 
     // Nadmuchanie menu z pliku XML
@@ -52,23 +63,39 @@ class AboutActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.home -> {
-                startActivity(Intent(this, ProfileActivity::class.java))
-                finish()
+                val intent = Intent(this, ProfileActivity::class.java)
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
+                startActivity(intent)
                 true
             }
             R.id.calendar -> {
-                startActivity(Intent(this, CalendarActivity::class.java))
-                finish()
+                val intent = Intent(this, CalendarActivity::class.java)
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
+                startActivity(intent)
                 true
             }
             R.id.settings -> {
-                startActivity(Intent(this, SettingsActivity::class.java))
-                finish()
+                val intent = Intent(this, SettingsActivity::class.java)
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
+                startActivity(intent)
+                true
+            }
+            R.id.about -> {
+                val intent = Intent(this, AboutActivity::class.java)
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
+                startActivity(intent)
+                true
+            }
+            R.id.exit -> {
+                finish() // Obsługa kliknięcia "Exit"
                 true
             }
             R.id.logout -> {
+                val auth = FirebaseAuth.getInstance()
                 auth.signOut()
-                startActivity(Intent(this, LoginActivity::class.java))
+
+                val intent = Intent(this, LoginActivity::class.java)
+                startActivity(intent)
                 finish()
                 true
             }

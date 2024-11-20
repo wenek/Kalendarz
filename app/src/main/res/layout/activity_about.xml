@@ -24,10 +24,47 @@
         android:text="@string/app_description_content"
         android:layout_below="@id/toolbar"
         android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
         android:maxWidth="400dp"
         android:gravity="center"
         android:textSize="18sp"
         android:textColor="?android:attr/textColorPrimary" />
+
+    <TextView
+        android:id="@+id/link1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/link1_text"
+        android:layout_below="@id/btnReturn"
+        android:layout_marginTop="100dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:textSize="20sp"
+        android:textColor="?android:attr/textColorPrimary"
+        android:clickable="true"
+        android:focusable="true"
+        android:gravity="center"/>
+
+    <TextView
+        android:id="@+id/link2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/link2_text"
+        android:layout_below="@id/link1"
+        android:layout_marginTop="16dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:textSize="20sp"
+        android:textColor="?android:attr/textColorPrimary"
+        android:clickable="true"
+        android:focusable="true"
+        android:gravity="center"
+        android:maxLines="2"
+        android:ellipsize="end"/>
+
 
     <Button
         android:id="@+id/btnReturn"

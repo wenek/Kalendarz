@@ -102,7 +102,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="16dp"
         android:text="@string/edit_bio"
-        android:textColor="?attr/colorPrimary"
+        android:textColor="?android:attr/textColorPrimary"
         android:backgroundTint="?android:attr/colorAccent"
         android:textStyle="bold" />
 
@@ -117,7 +117,7 @@
         android:padding="12dp"
         android:backgroundTint="?android:attr/colorAccent"
         android:text="@string/favorites"
-        android:textColor="?attr/colorPrimary"
+        android:textColor="?android:attr/textColorPrimary"
         android:textStyle="bold" />
 
     <!-- Przycisk wylogowania -->
@@ -131,7 +131,7 @@
         android:padding="12dp"
         android:backgroundTint="@color/red_primary"
         android:text="@string/logout"
-        android:textColor="@android:color/white"
+        android:textColor="?android:attr/textColorPrimary"
         android:textStyle="bold" />
 
 </RelativeLayout>
