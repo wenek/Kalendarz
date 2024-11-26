@@ -60,7 +60,8 @@
     <string name="edit_bio">Edytuj opis</string>
     <string name="save_bio">Zapisz opis</string>
     <string name="days_until_placeholder">Dni do święta</string>
-    <string name="days_until_holiday">Do święta zostało %1$d dni!</string>
+    <string name="holiday_today">Te święta są dzisiaj.</string>
+    <string name="days_until_holiday">Za %1$d dni!</string>
     <string name="holiday_passed">Święto już minęło.</string>
     <string name="no_upcoming_holidays">Brak nadchodzących świąt dla wybranej daty.</string>
     <string name="error_calculating_days">Błąd podczas obliczania dni do święta.</string>
@@ -79,6 +80,7 @@
     <string name="profile_creation_date">Konto stworzone: %s</string>
     <string name="link1_text">Jeśli szukasz więcej informacji odwiedź stronę kalbi.pl</string>
     <string name="link2_text">Podoba ci się aplikacja? Wesprzyj szczytny cel</string>
+    <string name="no_notification_time_set">Nie ustawiono czasu powiadomienia</string>
 
 
 </resources>

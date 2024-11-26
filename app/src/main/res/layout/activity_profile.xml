@@ -9,12 +9,13 @@
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="?attr/actionBarSize"
+        android:layout_alignParentTop="true"
         android:background="?attr/colorPrimary"
         android:elevation="4dp"
         android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
-        android:title="@string/app_name"
-        android:titleTextColor="@attr/colorAccent" />
+        android:title="@string/calendar_title"
+        android:titleTextColor="?android:attr/textColorPrimaryInverse" />
 
     <!-- Zdjęcie profilowe -->
     <ImageView

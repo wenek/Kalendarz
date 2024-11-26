@@ -4,6 +4,8 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.InputType
 import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.widget.EditText
 import android.widget.Toast
@@ -44,6 +46,9 @@ class ProfileActivity : AppCompatActivity() {
         // Load user profile data
         loadUserProfile()
 
+        // Konfiguracja Toolbar
+        setSupportActionBar(binding.toolbar)
+
         // Handle Favorites Button
         binding.showFavoritesButton.setOnClickListener {
             startActivity(Intent(this, FavoritesActivity::class.java))
@@ -82,6 +87,56 @@ class ProfileActivity : AppCompatActivity() {
                 .show()
         }
 
+    }
+
+    // Nadmuchanie menu z pliku XML
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.main_menu, menu)
+        return true
+    }
+
+    // Obsługa kliknięć w elementy menu
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.home -> {
+                val intent = Intent(this, ProfileActivity::class.java)
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
+                startActivity(intent)
+                true
+            }
+            R.id.calendar -> {
+                val intent = Intent(this, CalendarActivity::class.java)
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
+                startActivity(intent)
+                true
+            }
+            R.id.settings -> {
+                val intent = Intent(this, SettingsActivity::class.java)
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
+                startActivity(intent)
+                true
+            }
+            R.id.about -> {
+                val intent = Intent(this, AboutActivity::class.java)
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
+                startActivity(intent)
+                true
+            }
+            R.id.exit -> {
+                finish() // Obsługa kliknięcia "Exit"
+                true
+            }
+            R.id.logout -> {
+                val auth = FirebaseAuth.getInstance()
+                auth.signOut()
+
+                val intent = Intent(this, LoginActivity::class.java)
+                startActivity(intent)
+                finish()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 
     private fun saveBioToDatabase(bio: String) {

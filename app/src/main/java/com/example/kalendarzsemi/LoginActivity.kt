@@ -13,11 +13,11 @@ import com.example.kalendarzsemi.databinding.ActivityLoginBinding
 class LoginActivity : AppCompatActivity() {
 
     private lateinit var auth: FirebaseAuth
-    private var isPasswordVisible = false // Variable to store password visibility state
+    private var isPasswordVisible = false
     private lateinit var binding: ActivityLoginBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        // Set theme based on user preferences
+
         val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
         val themePreference = sharedPreferences.getString("theme_preference", "light")
         when (themePreference) {
@@ -25,17 +25,13 @@ class LoginActivity : AppCompatActivity() {
             "dark" -> setTheme(R.style.Theme_KalendarzSemi_Dark)
             "vibrant" -> setTheme(R.style.Theme_KalendarzSemi_Vibrant)
         }
-
         super.onCreate(savedInstanceState)
 
-        // Initialize ViewBinding
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // Initialize Firebase Auth
         auth = FirebaseAuth.getInstance()
 
-        // Set up the show/hide password functionality
         binding.showPasswordIcon.setOnClickListener {
             if (isPasswordVisible) {
                 // Hide password
@@ -46,11 +42,10 @@ class LoginActivity : AppCompatActivity() {
                 binding.etPassword.transformationMethod = HideReturnsTransformationMethod.getInstance()
                 binding.showPasswordIcon.setImageResource(R.drawable.baseline_visibility_24)
             }
-            isPasswordVisible = !isPasswordVisible // Toggle password visibility
-            binding.etPassword.setSelection(binding.etPassword.text.length) // Set cursor at the end
+            isPasswordVisible = !isPasswordVisible
+            binding.etPassword.setSelection(binding.etPassword.text.length)
         }
 
-        // Handle login
         binding.btnSubmit.setOnClickListener {
             val email = binding.etEmail.text.toString()
             val password = binding.etPassword.text.toString()
@@ -62,17 +57,14 @@ class LoginActivity : AppCompatActivity() {
             }
         }
 
-        // Navigate to RegisterActivity
         binding.btnGoToRegister.setOnClickListener {
             startActivity(Intent(this, RegisterActivity::class.java))
         }
 
-        // Navigate to ResetPasswordActivity
         binding.tvForgotPassword.setOnClickListener {
             startActivity(Intent(this, ResetPasswordActivity::class.java))
         }
 
-        // Navigate to MainActivity
         binding.btnReturnToMain.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)

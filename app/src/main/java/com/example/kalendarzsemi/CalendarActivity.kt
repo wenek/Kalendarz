@@ -209,11 +209,14 @@ class CalendarActivity : AppCompatActivity() {
             val daysDifference = ((holidayCalendar.timeInMillis - today.timeInMillis) / (1000 * 60 * 60 * 24)).toInt()
 
             // Wyświetlanie wyniku
-            if (daysDifference >= 0) {
+            if (daysDifference > 0) {
                 binding.tvDaysUntilHoliday.text = getString(R.string.days_until_holiday, daysDifference)
+            } else if (daysDifference == 0) {
+                binding.tvDaysUntilHoliday.text = getString(R.string.holiday_today)
             } else {
                 binding.tvDaysUntilHoliday.text = getString(R.string.holiday_passed)
             }
+
         } catch (e: Exception) {
             binding.tvDaysUntilHoliday.text = getString(R.string.error_calculating_days)
         }

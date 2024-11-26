@@ -67,6 +67,17 @@ class RegisterActivity : AppCompatActivity() {
                     Toast.makeText(this, "Hasła nie są takie same", Toast.LENGTH_SHORT).show()
                     return@setOnClickListener
                 }
+
+                // Sprawdzenie złożoności hasła
+                if (!isPasswordValid(password)) {
+                    Toast.makeText(
+                        this,
+                        "Hasło musi mieć co najmniej 8 znaków, zawierać co najmniej jedną literę i jedną cyfrę",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    return@setOnClickListener
+                }
+
                 registerUser(name, email, password)
             } else {
                 Toast.makeText(this, "Wypełnij wszystkie pola", Toast.LENGTH_SHORT).show()
@@ -79,6 +90,13 @@ class RegisterActivity : AppCompatActivity() {
             startActivity(intent)
             finish() // Close Register Activity
         }
+    }
+
+    private fun isPasswordValid(password: String): Boolean {
+        val hasLetter = password.any { it.isLetter() }
+        val hasDigit = password.any { it.isDigit() }
+        val isLongEnough = password.length >= 8
+        return hasLetter && hasDigit && isLongEnough
     }
 
     // Toggle password visibility

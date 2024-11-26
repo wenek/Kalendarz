@@ -65,6 +65,7 @@ class SettingsActivity : AppCompatActivity() {
                 else -> "light"
             }
             saveThemePreference(theme)
+            Toast.makeText(this, "Theme changed to: $theme", Toast.LENGTH_SHORT).show()
 
             // After changing the theme, restart MainActivity with the updated theme
             restartCalendarActivityWithTheme()
@@ -77,7 +78,11 @@ class SettingsActivity : AppCompatActivity() {
         // Schedule daily notifications
         binding.btnSaveNotification.setOnClickListener {
             Log.d(tag, "btnSaveNotification: Scheduling daily notification")
-            checkExactAlarmPermission() // Check if we have permission before scheduling
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                checkExactAlarmPermission()
+            } else {
+                Log.d(tag, "Exact alarm permission check skipped for Android versions below 12")
+            }
             scheduleDailyNotification()
         }
 
@@ -90,7 +95,6 @@ class SettingsActivity : AppCompatActivity() {
     @RequiresApi(Build.VERSION_CODES.S)
     private fun checkExactAlarmPermission() {
         val alarmManager = getSystemService(Context.ALARM_SERVICE) as AlarmManager
-
         if (!alarmManager.canScheduleExactAlarms()) {
             Log.w(tag, "Exact alarms permission not granted")
             val intent = Intent(Settings.ACTION_REQUEST_SCHEDULE_EXACT_ALARM)
@@ -122,27 +126,22 @@ class SettingsActivity : AppCompatActivity() {
         displaySaveNotification()
 
         try {
-            // Set a repeating alarm for daily notifications
             alarmManager.setRepeating(
                 AlarmManager.RTC_WAKEUP,
                 triggerTime,
-                AlarmManager.INTERVAL_DAY,  // 24-hour interval
+                AlarmManager.INTERVAL_DAY,
                 pendingIntent
             )
-
-            // Show confirmation that the notification is set
             showTimeSetConfirmation(triggerTime)
         } catch (e: SecurityException) {
             e.printStackTrace()
-            Toast.makeText(this, "Exact alarm permission is required", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Could not schedule the notification. Please check your permissions.", Toast.LENGTH_LONG).show()
         }
     }
 
-    // Helper method to get the first trigger time
     private fun getDailyTriggerTime(): Long {
         val calendar = java.util.Calendar.getInstance()
 
-        // Set the calendar to the time chosen by the user
         calendar.set(
             java.util.Calendar.HOUR_OF_DAY,
             binding.timePicker.hour
@@ -150,7 +149,6 @@ class SettingsActivity : AppCompatActivity() {
         calendar.set(java.util.Calendar.MINUTE, binding.timePicker.minute)
         calendar.set(java.util.Calendar.SECOND, 0)
 
-        // If the time is earlier than the current time, set the alarm for the next day
         if (calendar.timeInMillis <= System.currentTimeMillis()) {
             calendar.add(java.util.Calendar.DAY_OF_YEAR, 1)
         }
@@ -190,6 +188,8 @@ class SettingsActivity : AppCompatActivity() {
             val formattedTime = formatTime(timeInMillis)
             binding.tvNotificationTime.text = getString(R.string.notification_time_info, formattedTime)
             Log.d(tag, "displaySavedNotificationTime: Displaying saved time $formattedTime")
+        } else {
+            binding.tvNotificationTime.text = getString(R.string.no_notification_time_set)
         }
     }
 
@@ -207,10 +207,9 @@ class SettingsActivity : AppCompatActivity() {
         sharedPreferences.edit().putString("theme_preference", theme).apply()
     }
 
-    // Function to restart CalendarActivity with the new theme
     private fun restartCalendarActivityWithTheme() {
         val intent = Intent(this, CalendarActivity::class.java)
         startActivity(intent)
-        finish() // Close the current SettingsActivity
+        finish()
     }
 }
