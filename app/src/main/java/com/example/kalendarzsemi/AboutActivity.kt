@@ -15,7 +15,6 @@ class AboutActivity : AppCompatActivity() {
     private lateinit var binding: ActivityAboutBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        // Ustawienie tematu
         val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
         val themePreference = sharedPreferences.getString("theme_preference", "light")
         when (themePreference) {
@@ -23,43 +22,33 @@ class AboutActivity : AppCompatActivity() {
             "dark" -> setTheme(R.style.Theme_KalendarzSemi_Dark)
             "vibrant" -> setTheme(R.style.Theme_KalendarzSemi_Vibrant)
         }
-
         super.onCreate(savedInstanceState)
 
-        // Inicjalizacja bindingu
         binding = ActivityAboutBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // Ustawienie opisu aplikacji
         binding.appDescription.text = getString(R.string.app_description_content)
 
-        // Konfiguracja Toolbar
         setSupportActionBar(binding.toolbar)
 
-        // Obsługa przycisku powrotu
         binding.btnReturn.setOnClickListener {
-            finish() // Zamyka AboutActivity i wraca do poprzedniego widoku
+            finish()
         }
-
-        // Obsługa kliknięć linków
         binding.link1.setOnClickListener {
             val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://www.kalbi.pl/"))
             startActivity(intent)
         }
-
         binding.link2.setOnClickListener {
             val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://dioz.pl/pomoz/"))
             startActivity(intent)
         }
     }
 
-    // Nadmuchanie menu z pliku XML
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.main_menu, menu)
         return true
     }
 
-    // Obsługa kliknięć w elementy menu
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.home -> {
@@ -87,7 +76,7 @@ class AboutActivity : AppCompatActivity() {
                 true
             }
             R.id.exit -> {
-                finish() // Obsługa kliknięcia "Exit"
+                finish()
                 true
             }
             R.id.logout -> {

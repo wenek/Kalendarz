@@ -21,11 +21,22 @@ import java.util.*
 class CalendarActivity : AppCompatActivity() {
 
     private lateinit var currentDate: Calendar
-    private lateinit var binding: ActivityCalendarBinding // Inicjalizacja zmiennej do ViewBinding
+    private lateinit var binding: ActivityCalendarBinding
 
+    // 1. Inicjalizacja i ustawienia aplikacji
     override fun onCreate(savedInstanceState: Bundle?) {
+        loadTheme()
+        super.onCreate(savedInstanceState)
+        binding = ActivityCalendarBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        // Wczytanie preferencji motywu
+        setupToolbar()
+        currentDate = Calendar.getInstance()
+        updateCalendar()
+        setupButtonListeners()
+    }
+
+    private fun loadTheme() {
         val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
         val themePreference = sharedPreferences.getString("theme_preference", "light")
         when (themePreference) {
@@ -33,43 +44,26 @@ class CalendarActivity : AppCompatActivity() {
             "dark" -> setTheme(R.style.Theme_KalendarzSemi_Dark)
             "vibrant" -> setTheme(R.style.Theme_KalendarzSemi_Vibrant)
         }
-
-        super.onCreate(savedInstanceState)
-        binding = ActivityCalendarBinding.inflate(layoutInflater) // Tworzenie obiektu ViewBinding
-        setContentView(binding.root) // Ustawienie widoku
-
-        // Konfiguracja Toolbar
-        val toolbar = binding.toolbar // Zamiast findViewById, korzystamy z viewBinding
-        setSupportActionBar(toolbar)
-
-        currentDate = Calendar.getInstance()
-        updateCalendar()
-
-        // Obsługa przycisków do zmiany daty
-        binding.btnPreviousDay.setOnClickListener { // Zamiast findViewById
-            changeDay(-1)
-        }
-
-        binding.btnNextDay.setOnClickListener { // Zamiast findViewById
-            changeDay(1)
-        }
-
-        binding.btnSearchDate.setOnClickListener {
-            openDatePicker()
-        }
-
-        binding.btnSearchByName.setOnClickListener {
-            showSearchByNameDialog()
-        }
     }
 
-    // Nadmuchanie menu z pliku XML (main_menu.xml)
+    private fun setupToolbar() {
+        val toolbar = binding.toolbar
+        setSupportActionBar(toolbar)
+    }
+
+    private fun setupButtonListeners() {
+        binding.btnPreviousDay.setOnClickListener { changeDay(-1) }
+        binding.btnNextDay.setOnClickListener { changeDay(1) }
+        binding.btnSearchDate.setOnClickListener { openDatePicker() }
+        binding.btnSearchByName.setOnClickListener { showSearchByNameDialog() }
+    }
+
+    // 2. Obsługa menu
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.main_menu, menu)
         return true
     }
 
-    // Obsługa kliknięć elementów menu
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.home -> {
@@ -97,7 +91,7 @@ class CalendarActivity : AppCompatActivity() {
                 true
             }
             R.id.exit -> {
-                finish() // Obsługa kliknięcia "Exit"
+                finish()
                 true
             }
             R.id.logout -> {
@@ -113,13 +107,12 @@ class CalendarActivity : AppCompatActivity() {
         }
     }
 
-    // Funkcja otwierająca dialog do wyboru daty
+    // 3. Obsługa zdarzeń użytkownika
     private fun openDatePicker() {
         val calendar = Calendar.getInstance()
         val datePickerDialog = DatePickerDialog(
             this,
             { _, year, month, dayOfMonth ->
-                // Zaktualizuj kalendarz po wybraniu daty
                 val selectedDate = Calendar.getInstance()
                 selectedDate.set(year, month, dayOfMonth)
                 currentDate = selectedDate
@@ -129,31 +122,24 @@ class CalendarActivity : AppCompatActivity() {
             calendar.get(Calendar.MONTH),
             calendar.get(Calendar.DAY_OF_MONTH)
         )
-
         datePickerDialog.show()
     }
 
-    // Funkcja do zmiany dnia
     private fun changeDay(amount: Int) {
         currentDate.add(Calendar.DAY_OF_YEAR, amount)
         updateCalendar()
     }
 
     private fun updateCalendar() {
-        val dateFormat = SimpleDateFormat("dd.MM", Locale.getDefault()) // Zmiana formatu na "dd.MM"
+        val dateFormat = SimpleDateFormat("dd.MM", Locale.getDefault())
         val formattedDate = dateFormat.format(currentDate.time)
-
-        // Update date view
         binding.tvDate.text = formattedDate
-
-        // Clear previous holiday views
         binding.holidaysContainer.removeAllViews()
 
-        // Load holidays for the selected date (now without year)
         val holidays = loadHolidaysForDate(formattedDate)
         holidays.forEach { holiday ->
             val holidayTextView = TextView(this).apply {
-                text = holiday.first // Holiday name
+                text = holiday.first
                 textSize = 20f
                 setPadding(0, 16, 0, 16)
                 setOnClickListener {
@@ -167,28 +153,20 @@ class CalendarActivity : AppCompatActivity() {
             binding.holidaysContainer.addView(holidayTextView)
         }
 
-        // Calculate days until the first holiday if it exists
         if (holidays.isNotEmpty()) {
-            calculateDaysUntilHoliday(holidays[0].third) // third is the holiday date
+            calculateDaysUntilHoliday(holidays[0].third)
         } else {
             binding.tvDaysUntilHoliday.text = getString(R.string.no_upcoming_holidays)
         }
     }
 
+    // 4. Obsługa świąt
     private fun calculateDaysUntilHoliday(holidayDateString: String) {
         try {
-            // Dodanie aktualnego roku do daty święta
             val currentYear = Calendar.getInstance().get(Calendar.YEAR)
             val fullHolidayDateString = "$holidayDateString.$currentYear"
-
-            val dateFormat = SimpleDateFormat("dd.MM.yyyy", Locale.getDefault()) // Zmiana formatu na "dd.MM.yyyy"
+            val dateFormat = SimpleDateFormat("dd.MM.yyyy", Locale.getDefault())
             val holidayDate = dateFormat.parse(fullHolidayDateString)
-            if (holidayDate == null) {
-                binding.tvDaysUntilHoliday.text = getString(R.string.error_calculating_days)
-                return
-            }
-
-            // Obecna data (bez godzin, minut, sekund)
             val today = Calendar.getInstance().apply {
                 set(Calendar.HOUR_OF_DAY, 0)
                 set(Calendar.MINUTE, 0)
@@ -196,32 +174,16 @@ class CalendarActivity : AppCompatActivity() {
                 set(Calendar.MILLISECOND, 0)
             }
 
-            // Data święta (bez godzin, minut, sekund)
-            val holidayCalendar = Calendar.getInstance().apply {
-                time = holidayDate
-                set(Calendar.HOUR_OF_DAY, 0)
-                set(Calendar.MINUTE, 0)
-                set(Calendar.SECOND, 0)
-                set(Calendar.MILLISECOND, 0)
+            val daysDifference = ((holidayDate!!.time - today.timeInMillis) / (1000 * 60 * 60 * 24)).toInt()
+            binding.tvDaysUntilHoliday.text = when {
+                daysDifference > 0 -> getString(R.string.days_until_holiday, daysDifference)
+                daysDifference == 0 -> getString(R.string.holiday_today)
+                else -> getString(R.string.holiday_passed)
             }
-
-            // Różnica w dniach, dzielona przez liczbę milisekund w jednej dobie
-            val daysDifference = ((holidayCalendar.timeInMillis - today.timeInMillis) / (1000 * 60 * 60 * 24)).toInt()
-
-            // Wyświetlanie wyniku
-            if (daysDifference > 0) {
-                binding.tvDaysUntilHoliday.text = getString(R.string.days_until_holiday, daysDifference)
-            } else if (daysDifference == 0) {
-                binding.tvDaysUntilHoliday.text = getString(R.string.holiday_today)
-            } else {
-                binding.tvDaysUntilHoliday.text = getString(R.string.holiday_passed)
-            }
-
         } catch (e: Exception) {
             binding.tvDaysUntilHoliday.text = getString(R.string.error_calculating_days)
         }
     }
-
 
     private fun showSearchByNameDialog() {
         val input = EditText(this)
@@ -262,14 +224,12 @@ class CalendarActivity : AppCompatActivity() {
         }
 
         if (holidayFound != null) {
-            // Jeśli znaleziono, przejście do HolidayDetailActivity
             val intent = Intent(this, HolidayDetailActivity::class.java)
             intent.putExtra("holiday_name", holidayFound!!.first)
             intent.putExtra("holiday_description", holidayFound!!.second)
             intent.putExtra("holiday_date", holidayFound!!.third)
             startActivity(intent)
         } else {
-            // Jeśli nie znaleziono, wyświetlenie komunikatu
             AlertDialog.Builder(this)
                 .setTitle(getString(R.string.holiday_not_found))
                 .setMessage(getString(R.string.no_holiday_named, name))
@@ -280,12 +240,8 @@ class CalendarActivity : AppCompatActivity() {
 
     private fun loadHolidaysForDate(date: String): List<Triple<String, String, String>> {
         val holidaysList = mutableListOf<Triple<String, String, String>>()
-
-        // Load JSON file from resources
         val jsonString = loadJsonFromRaw(R.raw.holidays)
         val jsonObject = JSONObject(jsonString)
-
-        // Retrieve holidays for the given date (now using only "dd.MM")
         val holidaysForDay = jsonObject.optJSONArray(date)
         holidaysForDay?.let {
             for (i in 0 until it.length()) {
@@ -296,12 +252,10 @@ class CalendarActivity : AppCompatActivity() {
         return holidaysList
     }
 
-
-    // Funkcja do ładowania pliku JSON z zasobów raw
+    // 5. Funkcje narzędziowe
     private fun loadJsonFromRaw(resourceId: Int): String {
         val inputStream = resources.openRawResource(resourceId)
         val reader = BufferedReader(InputStreamReader(inputStream))
         return reader.use { it.readText() }
     }
-
 }

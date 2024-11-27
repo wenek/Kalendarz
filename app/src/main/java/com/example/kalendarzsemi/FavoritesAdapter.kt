@@ -18,7 +18,7 @@ class FavoritesAdapter
         val holiday = favoriteHolidays[position]
         holder.nameTextView.text = holiday.name
         holder.descriptionTextView.text = holiday.description
-        holder.dateTextView.text = holiday.date // Set the holiday date here
+        holder.dateTextView.text = holiday.date
     }
 
     override fun getItemCount() = favoriteHolidays.size
@@ -26,7 +26,7 @@ class FavoritesAdapter
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val nameTextView: TextView = itemView.findViewById(R.id.textViewHolidayName)
         val descriptionTextView: TextView = itemView.findViewById(R.id.textViewHolidayDescription)
-        val dateTextView: TextView = itemView.findViewById(R.id.textViewHolidayDate) // New date TextView
+        val dateTextView: TextView = itemView.findViewById(R.id.textViewHolidayDate)
     }
 }
 

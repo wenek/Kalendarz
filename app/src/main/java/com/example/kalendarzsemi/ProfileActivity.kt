@@ -24,7 +24,6 @@ class ProfileActivity : AppCompatActivity() {
     private lateinit var binding: ActivityProfileBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
-
         val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
         val themePreference = sharedPreferences.getString("theme_preference", "light")
         when (themePreference) {
@@ -32,32 +31,22 @@ class ProfileActivity : AppCompatActivity() {
             "dark" -> setTheme(R.style.Theme_KalendarzSemi_Dark)
             "vibrant" -> setTheme(R.style.Theme_KalendarzSemi_Vibrant)
         }
-
         super.onCreate(savedInstanceState)
 
-        // Initialize ViewBinding
         binding = ActivityProfileBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // Initialize Firebase
         auth = FirebaseAuth.getInstance()
         databaseReference = FirebaseDatabase.getInstance().reference
-
-        // Load user profile data
         loadUserProfile()
-
-        // Konfiguracja Toolbar
         setSupportActionBar(binding.toolbar)
 
-        // Handle Favorites Button
         binding.showFavoritesButton.setOnClickListener {
             startActivity(Intent(this, FavoritesActivity::class.java))
         }
-
         binding.profileImage.setOnClickListener {
             startActivity(Intent(this, ProfileActivity::class.java))
         }
-
         binding.logoutButton.setOnClickListener {
             val auth = FirebaseAuth.getInstance()
             auth.signOut()
@@ -66,16 +55,11 @@ class ProfileActivity : AppCompatActivity() {
             startActivity(intent)
             finish()
         }
-
         binding.editBioButton.setOnClickListener {
             val currentBio = binding.profileBio.text.toString()
-
-            // Tworzenie EditText w oknie dialogowym
             val editText = EditText(this)
             editText.setText(currentBio)
             editText.inputType = InputType.TYPE_CLASS_TEXT
-
-            // Okno dialogowe z EditText
             AlertDialog.Builder(this)
                 .setTitle("Edytuj opis")
                 .setView(editText)
@@ -86,16 +70,13 @@ class ProfileActivity : AppCompatActivity() {
                 .setNegativeButton("Anuluj", null)
                 .show()
         }
-
     }
 
-    // Nadmuchanie menu z pliku XML
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.main_menu, menu)
         return true
     }
 
-    // Obsługa kliknięć w elementy menu
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.home -> {
@@ -123,7 +104,7 @@ class ProfileActivity : AppCompatActivity() {
                 true
             }
             R.id.exit -> {
-                finish() // Obsługa kliknięcia "Exit"
+                finish()
                 true
             }
             R.id.logout -> {
@@ -144,14 +125,9 @@ class ProfileActivity : AppCompatActivity() {
         databaseReference.child("users").child(userUid).child("bio").setValue(bio)
             .addOnSuccessListener {
                 Toast.makeText(this, "Bio updated successfully!", Toast.LENGTH_SHORT).show()
+                loadUserProfile()
 
-                // Odśwież widok z nowym opisem
-                loadUserProfile()  // Ładujemy dane użytkownika, w tym zaktualizowany opis
-
-                // Po zapisaniu, ukrywamy EditText i pokazujemy TextView z nowym bio
-                binding.profileBio.visibility = View.VISIBLE  // Pokazujemy TextView
-
-                // Zmieniamy przycisk na "Edytuj"
+                binding.profileBio.visibility = View.VISIBLE
                 binding.editBioButton.text = getString(R.string.edit_bio)
             }
             .addOnFailureListener { exception ->
@@ -167,7 +143,6 @@ class ProfileActivity : AppCompatActivity() {
 
             userRef.get().addOnSuccessListener { snapshot ->
                 if (snapshot.exists()) {
-                    // Podstawowe dane użytkownika
                     val email = snapshot.child("email").value.toString()
                     val name = snapshot.child("name").value.toString()
                     val bio = snapshot.child("bio").value.toString()
@@ -175,15 +150,12 @@ class ProfileActivity : AppCompatActivity() {
                     binding.profileName.text = name
                     binding.profileEmail.text = email
                     binding.profileBio.text = bio
-
                     binding.profileBio.visibility = View.VISIBLE
 
-                    // Liczba ulubionych świąt
                     val favoritesRef = snapshot.child("favorites")
                     val favoritesCount = favoritesRef.childrenCount
                     binding.profileStatsAccountCreate.text = getString(R.string.profile_stats, favoritesCount)
 
-                    // Data utworzenia konta
                     val accountCreationDate = snapshot.child("accountCreationDate").value.toString()
                     binding.profileStatsHolidaysCount.text = getString(R.string.profile_creation_date, accountCreationDate)
                 }
@@ -192,6 +164,4 @@ class ProfileActivity : AppCompatActivity() {
             }
         }
     }
-
-
 }

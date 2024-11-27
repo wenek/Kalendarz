@@ -36,15 +36,12 @@ class RegisterActivity : AppCompatActivity() {
 
         super.onCreate(savedInstanceState)
 
-        // Initialize ViewBinding
         binding = ActivityRegisterBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // Initialize Firebase Auth and Database
         auth = FirebaseAuth.getInstance()
         database = FirebaseDatabase.getInstance().reference
 
-        // Password visibility toggles
         binding.showPasswordIcon.setOnClickListener {
             isPasswordVisible = !isPasswordVisible
             togglePasswordVisibility(binding.etPassword, isPasswordVisible, binding.showPasswordIcon)
@@ -55,7 +52,6 @@ class RegisterActivity : AppCompatActivity() {
             togglePasswordVisibility(binding.etConfirmPassword, isConfirmPasswordVisible, binding.showConfirmPasswordIcon)
         }
 
-        // Register button click listener
         binding.btnRegister.setOnClickListener {
             val name = binding.etName.text.toString()
             val email = binding.etEmail.text.toString()
@@ -68,7 +64,6 @@ class RegisterActivity : AppCompatActivity() {
                     return@setOnClickListener
                 }
 
-                // Sprawdzenie złożoności hasła
                 if (!isPasswordValid(password)) {
                     Toast.makeText(
                         this,
@@ -84,11 +79,10 @@ class RegisterActivity : AppCompatActivity() {
             }
         }
 
-        // Return to Login screen
         binding.btnReturnToLogin.setOnClickListener {
             val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
-            finish() // Close Register Activity
+            finish()
         }
     }
 
@@ -99,20 +93,17 @@ class RegisterActivity : AppCompatActivity() {
         return hasLetter && hasDigit && isLongEnough
     }
 
-    // Toggle password visibility
     private fun togglePasswordVisibility(editText: EditText, isVisible: Boolean, toggleIcon: ImageView) {
         if (isVisible) {
             editText.inputType = InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD
-            toggleIcon.setImageResource(R.drawable.baseline_visibility_off_24) // Hide icon
+            toggleIcon.setImageResource(R.drawable.baseline_visibility_off_24)
         } else {
             editText.inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
-            toggleIcon.setImageResource(R.drawable.baseline_visibility_24) // Show icon
+            toggleIcon.setImageResource(R.drawable.baseline_visibility_24)
         }
-        // Move cursor to the end of the text
         editText.setSelection(editText.text.length)
     }
 
-    // Register user using Firebase
     private fun registerUser(name: String, email: String, password: String) {
         auth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener(this) { task ->
@@ -123,22 +114,18 @@ class RegisterActivity : AppCompatActivity() {
                     Toast.makeText(this, "Rejestracja udana!", Toast.LENGTH_SHORT).show()
                     val intent = Intent(this, LoginActivity::class.java)
                     startActivity(intent)
-                    finish() // Close Register Activity
+                    finish()
                 } else {
                     Toast.makeText(this, "Rejestracja nieudana: ${task.exception?.message}", Toast.LENGTH_SHORT).show()
                 }
             }
     }
 
-    // Save user data to Firebase Realtime Database
     private fun saveUserToDatabase(userId: String, name: String, email: String) {
-        // Pobranie aktualnej daty utworzenia konta
         val creationDate = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(Date())
 
-        // Dane użytkownika
         val user = User(name, email, creationDate)
 
-        // Zapis do Firebase
         database.child("users").child(userId).setValue(user)
             .addOnSuccessListener {
                 Toast.makeText(this, "Użytkownik zapisany w bazie danych", Toast.LENGTH_SHORT).show()
@@ -149,7 +136,6 @@ class RegisterActivity : AppCompatActivity() {
     }
 }
 
-// Data class for User
 data class User(
     val name: String,
     val email: String,

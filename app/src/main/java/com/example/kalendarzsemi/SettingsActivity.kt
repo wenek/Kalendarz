@@ -40,15 +40,12 @@ class SettingsActivity : AppCompatActivity() {
             "dark" -> setTheme(R.style.Theme_KalendarzSemi_Dark)
             "vibrant" -> setTheme(R.style.Theme_KalendarzSemi_Vibrant)
         }
-
         super.onCreate(savedInstanceState)
         binding = ActivitySettingsBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // Display previously saved notification time
         displaySaveNotification()
 
-        // Set the radio buttons based on the saved theme preference
         val savedTheme = sharedPreferences.getString("theme_preference", "light")
         when (savedTheme) {
             "light" -> binding.rbLight.isChecked = true
@@ -56,7 +53,6 @@ class SettingsActivity : AppCompatActivity() {
             "vibrant" -> binding.rbCustom.isChecked = true
         }
 
-        // Handle theme change when radio button is selected
         binding.radioGroupTheme.setOnCheckedChangeListener { _, checkedId ->
             val theme = when (checkedId) {
                 R.id.rbLight -> "light"
@@ -66,16 +62,12 @@ class SettingsActivity : AppCompatActivity() {
             }
             saveThemePreference(theme)
             Toast.makeText(this, "Theme changed to: $theme", Toast.LENGTH_SHORT).show()
-
-            // After changing the theme, restart MainActivity with the updated theme
             restartCalendarActivityWithTheme()
         }
 
-        // Button handling
         binding.btnReturn.setOnClickListener { finish() }
         createNotificationChannel()
 
-        // Schedule daily notifications
         binding.btnSaveNotification.setOnClickListener {
             Log.d(tag, "btnSaveNotification: Scheduling daily notification")
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
@@ -85,8 +77,6 @@ class SettingsActivity : AppCompatActivity() {
             }
             scheduleDailyNotification()
         }
-
-        // Cancel the scheduled notifications if needed
         binding.btnCancelNotification.setOnClickListener {
             cancelScheduledNotification()
         }
@@ -100,7 +90,7 @@ class SettingsActivity : AppCompatActivity() {
             val intent = Intent(Settings.ACTION_REQUEST_SCHEDULE_EXACT_ALARM)
                 .setData(Uri.parse("package:$packageName"))
             startActivity(intent)
-            Toast.makeText(this, "Enable exact alarm permission in settings", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Włącz uprawnienia do ustawiania powiadomień dokładnych", Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -108,7 +98,6 @@ class SettingsActivity : AppCompatActivity() {
     private fun scheduleDailyNotification() {
         Log.d(tag, "scheduleDailyNotification: Starting notification setup")
         val alarmManager = getSystemService(Context.ALARM_SERVICE) as AlarmManager
-
         val intent = Intent(applicationContext, Notification::class.java).apply {
             putExtra(titleExtra, "Nietypowy Kalendarz")
             putExtra(messageExtra, "Przypomnienie o sprawdzeniu kalendarza")
@@ -124,7 +113,6 @@ class SettingsActivity : AppCompatActivity() {
         val triggerTime = getDailyTriggerTime()
         saveNotificationTime(triggerTime)
         displaySaveNotification()
-
         try {
             alarmManager.setRepeating(
                 AlarmManager.RTC_WAKEUP,
@@ -135,7 +123,7 @@ class SettingsActivity : AppCompatActivity() {
             showTimeSetConfirmation(triggerTime)
         } catch (e: SecurityException) {
             e.printStackTrace()
-            Toast.makeText(this, "Could not schedule the notification. Please check your permissions.", Toast.LENGTH_LONG).show()
+            Toast.makeText(this, "Nie można ustawić powiadomienia. Sprawdź uprawnienia.", Toast.LENGTH_LONG).show()
         }
     }
 
@@ -158,7 +146,7 @@ class SettingsActivity : AppCompatActivity() {
 
     private fun showTimeSetConfirmation(triggerTime: Long) {
         val formattedTime = formatTime(triggerTime)
-        Toast.makeText(this, "Notification set for: $formattedTime", Toast.LENGTH_SHORT).show()
+        Toast.makeText(this, "Powiadomienie ustawione na: $formattedTime", Toast.LENGTH_SHORT).show()
     }
 
     private fun cancelScheduledNotification() {
@@ -168,7 +156,7 @@ class SettingsActivity : AppCompatActivity() {
             applicationContext, NOTIFICATIONID, intent, PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT
         )
         alarmManager.cancel(pendingIntent)
-        Toast.makeText(this, "Scheduled notification has been canceled.", Toast.LENGTH_SHORT).show()
+        Toast.makeText(this, "Zaplanowane powiadomienie anulowane", Toast.LENGTH_SHORT).show()
     }
 
     private fun createNotificationChannel() {

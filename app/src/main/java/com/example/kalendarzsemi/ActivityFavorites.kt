@@ -22,7 +22,6 @@ class FavoritesActivity : AppCompatActivity() {
     private val tag = "FavoritesActivity"
 
     override fun onCreate(savedInstanceState: Bundle?) {
-
         val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
         val themePreference = sharedPreferences.getString("theme_preference", "light")
         when (themePreference) {
@@ -30,30 +29,24 @@ class FavoritesActivity : AppCompatActivity() {
             "dark" -> setTheme(R.style.Theme_KalendarzSemi_Dark)
             "vibrant" -> setTheme(R.style.Theme_KalendarzSemi_Vibrant)
         }
-
         super.onCreate(savedInstanceState)
 
-        // Initialize ViewBinding
         binding = ActivityFavoritesBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         auth = FirebaseAuth.getInstance()
         databaseReference = FirebaseDatabase.getInstance().reference
 
-        // Set up RecyclerView
         binding.recyclerViewFavorites.layoutManager = LinearLayoutManager(this)
         favoritesAdapter = FavoritesAdapter(favoriteHolidays)
         binding.recyclerViewFavorites.adapter = favoritesAdapter
 
-        // Konfiguracja Toolbar
-        val toolbar = binding.toolbar // Zamiast findViewById, korzystamy z viewBinding
+        val toolbar = binding.toolbar
         setSupportActionBar(toolbar)
 
         loadFavoriteHolidays()
     }
 
-
-    // Load favorite holidays from Firebase
     private fun loadFavoriteHolidays() {
         val currentUser = auth.currentUser
         if (currentUser != null) {
@@ -80,13 +73,11 @@ class FavoritesActivity : AppCompatActivity() {
         }
     }
 
-    // Create sorting options menu
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_favorites_sort, menu)
         return true
     }
 
-    // Handle sorting menu item clicks
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.sort_by_date -> {
@@ -106,19 +97,18 @@ class FavoritesActivity : AppCompatActivity() {
     }
 
     private fun sortFavoritesByDate() {
-        favoriteHolidays.sortBy { it.date } // Assuming `Holiday.date` is of type String or Date
+        favoriteHolidays.sortBy { it.date }
         favoritesAdapter.notifyDataSetChanged()
         Toast.makeText(this, "Sorted by date", Toast.LENGTH_SHORT).show()
     }
 
     private fun sortFavoritesAlphabetically() {
-        favoriteHolidays.sortBy { it.name } // Assuming `Holiday.name` is the holiday's name
+        favoriteHolidays.sortBy { it.name }
         favoritesAdapter.notifyDataSetChanged()
         Toast.makeText(this, "Sorted alphabetically", Toast.LENGTH_SHORT).show()
     }
 
     private fun sortFavoritesByAdditionOrder() {
-        // Reload favorites in the original order from Firebase
         loadFavoriteHolidays()
         Toast.makeText(this, "Sorted by addition order", Toast.LENGTH_SHORT).show()
     }

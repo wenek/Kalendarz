@@ -20,20 +20,13 @@ class ResetPasswordActivity : AppCompatActivity() {
             "dark" -> setTheme(R.style.Theme_KalendarzSemi_Dark)
             "vibrant" -> setTheme(R.style.Theme_KalendarzSemi_Vibrant)
         }
-
         super.onCreate(savedInstanceState)
 
-        // Initialize ViewBinding
         binding = ActivityResetPasswordBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        // Initialize Firebase Authentication
         auth = FirebaseAuth.getInstance()
-
-        // Reset password button click handler
         binding.btnResetPassword.setOnClickListener {
             val email = binding.etEmail.text.toString()
-
             if (email.isNotEmpty()) {
                 resetPassword(email)
             } else {
