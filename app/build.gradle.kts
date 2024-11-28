@@ -83,5 +83,4 @@ dependencies {
     implementation(libs.glide) // Replace with the latest version if needed
     annotationProcessor(libs.compiler) // For annotation processing
     implementation(libs.material)
-
 }

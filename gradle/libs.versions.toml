@@ -18,6 +18,7 @@ firebaseAuthKtx = "23.0.0"
 material = "1.12.0"
 firebaseDatabase = "21.0.0"
 firebaseStorageKtx = "21.0.1"
+robolectricBom = "4.9"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -45,6 +46,8 @@ firebase-auth-ktx = { group = "com.google.firebase", name = "firebase-auth-ktx",
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 firebase-database = { group = "com.google.firebase", name = "firebase-database", version.ref = "firebaseDatabase" }
 firebase-storage-ktx = { group = "com.google.firebase", name = "firebase-storage-ktx", version.ref = "firebaseStorageKtx" }
+robolectric = { module = "org.robolectric:robolectric" }
+robolectric-bom = { module = "org.robolectric:robolectric-bom", version.ref = "robolectricBom" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
