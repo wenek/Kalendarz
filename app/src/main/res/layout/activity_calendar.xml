@@ -1,27 +1,37 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?attr/colorPrimary">
+    android:background="?attr/colorPrimary"
+    tools:context=".CalendarActivity">
 
     <!-- Toolbar -->
+
+    <!-- Data dnia -->
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="?attr/actionBarSize"
-        android:layout_alignParentTop="true"
+        android:layout_marginTop="0dp"
         android:background="?attr/colorPrimary"
         android:elevation="4dp"
         android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
         android:title="@string/calendar_title"
-        android:titleTextColor="?android:attr/textColorPrimaryInverse" />
+        android:titleTextColor="?android:attr/textColorPrimaryInverse"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <!-- Data dnia -->
     <TextView
         android:id="@+id/tvDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/toolbar"
-        android:layout_centerHorizontal="true"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         android:layout_marginTop="16dp"
         android:padding="8dp"
         android:text="@string/date_placeholder"
@@ -29,12 +39,15 @@
         android:textStyle="bold"
         android:textColor="?android:attr/textColorPrimary" />
 
+    <!-- Dni do świąt -->
     <TextView
         android:id="@+id/tvDaysUntilHoliday"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/tvDate"
-        android:layout_centerHorizontal="true"
+        app:layout_constraintTop_toBottomOf="@id/tvDate"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         android:layout_marginTop="8dp"
         android:padding="8dp"
         android:text="@string/days_until_placeholder"
@@ -42,70 +55,76 @@
         android:textStyle="italic"
         android:textColor="?android:attr/textColorSecondary" />
 
-
     <!-- Kontener na listę świąt -->
+
+    <!-- Przycisk szukania po dacie -->
+
+    <!-- Przycisk szukania po nazwie -->
     <ScrollView
         android:id="@+id/holidaysScrollContainer"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_below="@id/tvDaysUntilHoliday"
-        android:layout_above="@id/btnSearchDate"
-        android:contentDescription="@string/holidays_list"
-        android:layout_marginTop="16dp"
         android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
-        android:layout_centerHorizontal="true"
-        android:gravity="center">
+        android:gravity="center"
+        android:contentDescription="@string/holidays_list"
+        app:layout_constraintBottom_toTopOf="@+id/btnSearchDate"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvDaysUntilHoliday">
 
         <LinearLayout
             android:id="@+id/holidaysContainer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
-            android:padding="8dp"
             android:gravity="center"
-            android:textColor="?android:attr/textColorPrimary"/>
+            android:orientation="vertical"
+            android:padding="8dp"
+            android:textColor="?android:attr/textColorPrimary" />
     </ScrollView>
 
     <Button
         android:id="@+id/btnSearchDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@id/btnSearchByName"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="16dp"
+        android:backgroundTint="?attr/colorAccent"
         android:padding="16dp"
         android:text="@string/search_date"
-        android:backgroundTint="?attr/colorAccent"
+        android:textColor="?android:attr/textColorPrimary"
         android:textSize="18sp"
         android:textStyle="bold"
-        android:textColor="?android:attr/textColorPrimary"
-        android:layout_gravity="center"/>
+        app:layout_constraintBottom_toTopOf="@+id/btnSearchByName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/btnSearchByName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@id/navigationButtonsContainer"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="16dp"
+        android:backgroundTint="?attr/colorAccent"
         android:padding="16dp"
         android:text="@string/search_name"
-        android:backgroundTint="?attr/colorAccent"
+        android:textColor="?android:attr/textColorPrimary"
         android:textSize="18sp"
         android:textStyle="bold"
-        android:textColor="?android:attr/textColorPrimary"
-        android:layout_gravity="center"/>
+        app:layout_constraintBottom_toTopOf="@+id/navigationButtonsContainer"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent" />
 
-    <!-- Kontener nawigacji -->
+    <!-- Kontener przycisków nawigacyjnych -->
     <LinearLayout
         android:id="@+id/navigationButtonsContainer"
         style="?android:attr/buttonBarStyle"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         android:orientation="horizontal"
         android:padding="16dp"
         android:gravity="center">
@@ -113,27 +132,34 @@
         <!-- Przycisk poprzedni dzień -->
         <Button
             android:id="@+id/btnPreviousDay"
+            style="?android:attr/buttonBarButtonStyle"
             android:layout_width="wrap_content"
-            style="?android:attr/buttonBarStyle"
             android:layout_height="50dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/btnNextDay"
+            app:layout_constraintVertical_bias="0.5"
             android:layout_marginEnd="8dp"
             android:backgroundTint="?attr/colorAccent"
             android:text="@string/previous_day"
-            android:textSize="18sp"
+            android:textSize="14sp"
             android:maxWidth="200dp"
             android:textColor="?android:attr/textColorPrimary" />
 
         <!-- Przycisk następny dzień -->
         <Button
             android:id="@+id/btnNextDay"
-            style="?android:attr/buttonBarStyle"
+            style="?android:attr/buttonBarButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="50dp"
+            app:layout_constraintStart_toEndOf="@id/btnPreviousDay"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintVertical_bias="0.5"
             android:layout_marginStart="8dp"
             android:backgroundTint="?attr/colorAccent"
             android:text="@string/next_day"
-            android:textSize="18sp"
+            android:textSize="14sp"
             android:maxWidth="200dp"
             android:textColor="?android:attr/textColorPrimary" />
     </LinearLayout>
-</RelativeLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

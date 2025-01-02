@@ -81,6 +81,7 @@
     <string name="link1_text">Jeśli szukasz więcej informacji odwiedź stronę kalbi.pl</string>
     <string name="link2_text">Podoba ci się aplikacja? Wesprzyj szczytny cel</string>
     <string name="no_notification_time_set">Nie ustawiono czasu powiadomienia</string>
+    <string name="app_logo_desc">splash screen logo</string>
 
 
 </resources>

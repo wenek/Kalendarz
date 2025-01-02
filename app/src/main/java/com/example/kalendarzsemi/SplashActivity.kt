@@ -25,6 +25,9 @@ class SplashActivity : AppCompatActivity() {
         val slideInAnim: Animation = AnimationUtils.loadAnimation(this, R.anim.slide_in_from_left)
         binding.appNameTextView.startAnimation(slideInAnim)
 
+        val fadeInAnim: Animation = AnimationUtils.loadAnimation(this, R.anim.fade_in)
+        binding.logoImageView.startAnimation(fadeInAnim)
+
         Handler(Looper.getMainLooper()).postDelayed({
             val currentUser = auth.currentUser
             val intent = if (currentUser != null) {

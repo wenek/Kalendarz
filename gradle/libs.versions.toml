@@ -1,5 +1,6 @@
 [versions]
 agp = "8.5.0"
+appcompatVersion = "1.6.1"
 compiler = "4.16.0"
 firebaseBom = "33.6.0"
 glide = "4.16.0"
@@ -11,17 +12,25 @@ espressoCore = "3.6.1"
 lifecycleRuntimeKtx = "2.6.1"
 activityCompose = "1.9.0"
 composeBom = "2024.04.01"
-constraintlayout = "2.1.4"
+constraintlayout = "2.2.0"
 appcompat = "1.7.0"
+mockitoKotlin = "4.1.0"
 preferenceKtx = "1.2.1"
-firebaseAuthKtx = "23.0.0"
-material = "1.12.0"
+firebaseAuthKtx = "23.1.0"
+material = "1.9.0"
 firebaseDatabase = "21.0.0"
 firebaseStorageKtx = "21.0.1"
+recyclerview = "1.3.2"
+robolectric = "4.9.2"
 robolectricBom = "4.9"
+junitJunit = "4.13.2"
+junitKtx = "1.2.1"
+robolectricVersion = "4.10"
 
 [libraries]
+androidx-appcompat-v161 = { module = "androidx.appcompat:appcompat", version.ref = "appcompatVersion" }
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
+androidx-recyclerview = { module = "androidx.recyclerview:recyclerview", version.ref = "recyclerview" }
 compiler = { module = "com.github.bumptech.glide:compiler", version.ref = "compiler" }
 firebase-analytics = { module = "com.google.firebase:firebase-analytics" }
 firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "firebaseBom" }
@@ -46,8 +55,12 @@ firebase-auth-ktx = { group = "com.google.firebase", name = "firebase-auth-ktx",
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 firebase-database = { group = "com.google.firebase", name = "firebase-database", version.ref = "firebaseDatabase" }
 firebase-storage-ktx = { group = "com.google.firebase", name = "firebase-storage-ktx", version.ref = "firebaseStorageKtx" }
+mockito-kotlin = { module = "org.mockito.kotlin:mockito-kotlin", version.ref = "mockitoKotlin" }
 robolectric = { module = "org.robolectric:robolectric" }
 robolectric-bom = { module = "org.robolectric:robolectric-bom", version.ref = "robolectricBom" }
+junit-junit = { group = "junit", name = "junit", version.ref = "junitJunit" }
+androidx-junit-ktx = { group = "androidx.test.ext", name = "junit-ktx", version.ref = "junitKtx" }
+robolectric-robolectric = { module = "org.robolectric:robolectric", version.ref = "robolectricVersion" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

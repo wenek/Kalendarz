@@ -111,7 +111,10 @@ class SettingsActivity : AppCompatActivity() {
         )
 
         val triggerTime = getDailyTriggerTime()
-        saveNotificationTime(triggerTime)
+        val hour = binding.timePicker.hour
+        val minute = binding.timePicker.minute
+        saveNotificationTime(hour, minute)
+
         displaySaveNotification()
         try {
             alarmManager.setRepeating(
@@ -181,10 +184,14 @@ class SettingsActivity : AppCompatActivity() {
         }
     }
 
-    private fun saveNotificationTime(timeInMillis: Long) {
-        sharedPreferences.edit().putLong("notification_time", timeInMillis).apply()
-        Log.d(tag, "saveNotificationTime: Notification time saved as $timeInMillis")
+    private fun saveNotificationTime(hour: Int, minute: Int) {
+        sharedPreferences.edit()
+            .putInt("notification_hour", hour.toInt())
+            .putInt("notification_minute", minute)
+            .apply()
+        Log.d(tag, "saveNotificationTime: Notification time saved as $hour:$minute")
     }
+
 
     private fun formatTime(timeInMillis: Long): String {
         val dateFormat = SimpleDateFormat("HH:mm", Locale.getDefault())
